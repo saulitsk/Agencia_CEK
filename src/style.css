@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    /* Lenis Smooth Scroll base styles */
+    html.lenis,
+    html.lenis body {
+        height: auto;
+    }
+
+    .lenis.lenis-smooth {
+        scroll-behavior: auto !important;
+    }
+
+    .lenis.lenis-smooth [data-lenis-prevent] {
+        overscroll-behavior: contain;
+    }
+
+    .lenis.lenis-stopped {
+        overflow: hidden;
+    }
+
+    .lenis.lenis-smooth iframe {
+        pointer-events: none;
+    }
+
+    /* Accessibility: Focus Visible */
+    :focus-visible {
+        outline: 2px solid theme('colors.vibrant-gold');
+        outline-offset: 4px;
+    }
+
+    /* Accessibility: Skip to content */
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: theme('colors.vibrant-gold');
+        color: theme('colors.deep-navy');
+        padding: 8px;
+        z-index: 100;
+        transition: top 0.2s;
+    }
+
+    .skip-link:focus {
+        top: 0;
+    }
+}
+
+@layer utilities {
+    .reveal-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-up.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .parallax-bg {
+        will-change: transform;
+    }
+
+    .header-hide {
+        transform: translateY(-100%);
+    }
+
+    .ticket-shape {
+        mask-image: radial-gradient(circle at 0% 50%, transparent 16px, black 17px), radial-gradient(circle at 100% 50%, transparent 16px, black 17px);
+        mask-size: 51% 100%;
+        mask-repeat: no-repeat;
+        mask-position: left, right;
+        -webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 16px, black 17px), radial-gradient(circle at 100% 50%, transparent 16px, black 17px);
+        -webkit-mask-size: 51% 100%;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: left, right;
+    }
+
+    .serrated-edges {
+        background-image: radial-gradient(circle at 50% 0, transparent 4px, #F7F2C8 5px), radial-gradient(circle at 50% 100%, transparent 4px, #F7F2C8 5px);
+        background-size: 16px 10px;
+        background-repeat: repeat-x;
+        background-position: 0 0, 0 100%;
+    }
+
+    .destination-overlay {
+        transition: background-color 0.5s ease;
+    }
+
+    .group:hover .destination-overlay {
+        background-color: rgba(18, 32, 92, 0.4);
+    }
+
+    /* Reduce motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal-up {
+            transition: none;
+            opacity: 1;
+            transform: none;
+        }
+
+        .parallax-bg {
+            will-change: auto;
+            transform: none !important;
+        }
+
+        .header-hide {
+            transition: none;
+        }
+
+        * {
+            scroll-behavior: auto !important;
+        }
+    }
+}

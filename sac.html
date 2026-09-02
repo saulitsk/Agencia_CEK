@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SAC - Agência C&K</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@600&family=Plus+Jakarta+Sans:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden selection:bg-vibrant-gold selection:text-deep-navy">
+    
+    <nav class="fixed top-0 w-full z-50 transition-transform duration-300 bg-deep-navy/95 backdrop-blur shadow-md" id="main-nav" aria-label="Navegação Principal">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base max-w-[1440px] mx-auto">
+            <a href="index.html" class="font-headline-md text-headline-md font-bold text-vibrant-gold drop-shadow-md outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold focus-visible:rounded-sm">
+                Agência C&K
+            </a>
+            
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="index.html#destinos" class="text-pure-white hover:text-vibrant-gold transition-colors font-label-caps text-label-caps hover:scale-105 hover:shadow-[0px_4px_0px_0px_rgba(18,32,92,1)] transition-all">Destinos</a>
+                <a href="index.html#promocoes" class="text-pure-white hover:text-vibrant-gold transition-colors font-label-caps text-label-caps hover:scale-105 hover:shadow-[0px_4px_0px_0px_rgba(18,32,92,1)] transition-all">Promoções</a>
+                <a href="index.html#sobre" class="text-pure-white hover:text-vibrant-gold transition-colors font-label-caps text-label-caps hover:scale-105 hover:shadow-[0px_4px_0px_0px_rgba(18,32,92,1)] transition-all">Sobre</a>
+                <a href="index.html#contato" class="text-pure-white hover:text-vibrant-gold transition-colors font-label-caps text-label-caps hover:scale-105 hover:shadow-[0px_4px_0px_0px_rgba(18,32,92,1)] transition-all">Contato</a>
+            </div>
+            
+            <button id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu mobile" class="md:hidden text-pure-white p-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold">
+                <span class="material-symbols-outlined text-3xl" aria-hidden="true">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-deep-navy text-pure-white transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col p-8" aria-hidden="true">
+        <div class="flex justify-between items-center mb-12">
+            <div class="font-headline-md text-headline-md font-bold text-vibrant-gold">Agência C&K</div>
+            <button id="mobile-menu-close" aria-label="Fechar menu mobile" class="p-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold">
+                <span class="material-symbols-outlined text-3xl" aria-hidden="true">close</span>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-8" aria-label="Navegação Mobile">
+            <a href="index.html#destinos" class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Destinos</a>
+            <a href="index.html#promocoes" class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Promoções</a>
+            <a href="index.html#sobre" class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Sobre</a>
+            <a href="index.html#contato" class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Contato</a>
+        </nav>
+    </div>
+
+    <main class="min-h-screen pt-32 pb-section-gap px-margin-mobile md:px-margin-desktop flex flex-col items-center justify-center text-center">
+        <span class="material-symbols-outlined text-6xl text-vibrant-gold mb-6" aria-hidden="true">support_agent</span>
+        <h1 class="font-display-xl text-headline-lg-mobile md:text-headline-lg text-deep-navy mb-4">SAC</h1>
+        <p class="font-body-lg text-body-lg text-surface-variant max-w-xl mb-8">Nossa página de atendimento está em desenvolvimento. Por favor, entre em contato via WhatsApp.</p>
+        <div class="flex flex-col md:flex-row gap-4">
+            <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20do%20SAC." target="_blank" rel="noopener noreferrer" class="flex items-center justify-center space-x-2 bg-vibrant-gold text-deep-navy px-8 py-4 rounded-lg font-label-caps text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#12205C] transition-all">
+                <span class="material-symbols-outlined" aria-hidden="true">chat</span>
+                <span>Falar no WhatsApp</span>
+            </a>
+            <a href="index.html" class="flex items-center justify-center space-x-2 bg-deep-navy text-pure-white px-8 py-4 rounded-lg font-label-caps text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#F4B93E] transition-all">
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                <span>Voltar para a Home</span>
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-deep-navy w-full border-t border-outline-variant flat no shadows mt-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-section-gap w-full max-w-[1440px] mx-auto">
+            <div class="font-headline-md text-headline-md text-vibrant-gold mb-8 md:mb-0">
+                Agência C&K
+            </div>
+            <nav class="flex flex-wrap justify-center gap-6 mb-8 md:mb-0" aria-label="Rodapé">
+                <a href="termos.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-label-caps text-label-caps opacity-80 hover:opacity-100">Termos de Uso</a>
+                <a href="privacidade.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-label-caps text-label-caps opacity-80 hover:opacity-100">Política de Privacidade</a>
+                <a href="sac.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-label-caps text-label-caps opacity-80 hover:opacity-100">SAC</a>
+            </nav>
+            <div class="text-surface-variant font-body-md text-body-md text-center md:text-right">
+                © 2024 Agência C&K. Parceiro Oficial Viação Novo Horizonte.
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="./src/main.js"></script>
+</body>
+</html>
