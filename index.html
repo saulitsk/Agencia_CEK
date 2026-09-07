@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@600&family=Plus+Jakarta+Sans:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet"/>
     
     <link rel="stylesheet" href="./src/style.css">
     
@@ -40,7 +40,7 @@
 <body class="bg-surface text-on-surface antialiased overflow-x-hidden selection:bg-vibrant-gold selection:text-deep-navy">
     
     <!-- Skip to content for Accessibility -->
-    <a href="#main-content" class="skip-link font-label-caps text-label-caps">Pular para o conteúdo principal</a>
+    <a href="#main-content" class="skip-link font-body-md font-medium text-label-caps">Pular para o conteúdo principal</a>
 
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 transition-transform duration-300 bg-transparent" id="main-nav" aria-label="Navegação Principal">
@@ -49,16 +49,32 @@
                 Agência C&K
             </a>
             
-            <div class="hidden md:flex space-x-8 items-center">
-                <a href="#viacoes" class="text-pure-white hover:text-vibrant-gold transition-colors font-label-caps text-label-caps hover:scale-105 transition-all">Nossas Viações</a>
-                <a href="#destinos" class="text-pure-white hover:text-vibrant-gold transition-colors font-label-caps text-label-caps hover:scale-105 transition-all">Destinos</a>
-                <a href="#promocoes" class="text-pure-white hover:text-vibrant-gold transition-colors font-label-caps text-label-caps hover:scale-105 transition-all">Promoções</a>
-                <a href="#sobre" class="text-pure-white hover:text-vibrant-gold transition-colors font-label-caps text-label-caps hover:scale-105 transition-all">Sobre</a>
-                <a href="#contato" class="text-pure-white hover:text-vibrant-gold transition-colors font-label-caps text-label-caps hover:scale-105 transition-all">Contato</a>
+            <!-- Nav pill capsule -->
+            <div class="hidden md:flex items-center gap-1 px-2 py-2 rounded-full nav-pill" id="nav-pill">
+                <a href="#viacoes" class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200" data-section="viacoes">
+                    <span class="material-symbols-outlined text-[16px] leading-none" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">directions_bus</span>
+                    Nossas Viações
+                </a>
+                <a href="#destinos" class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200" data-section="destinos">
+                    <span class="material-symbols-outlined text-[16px] leading-none" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">map</span>
+                    Destinos
+                </a>
+                <a href="#promocoes" class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200" data-section="promocoes">
+                    <span class="material-symbols-outlined text-[16px] leading-none" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">sell</span>
+                    Promoções
+                </a>
+                <a href="#sobre" class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200" data-section="sobre">
+                    <span class="material-symbols-outlined text-[16px] leading-none" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">info</span>
+                    Sobre
+                </a>
+                <a href="#contato" class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200" data-section="contato">
+                    <span class="material-symbols-outlined text-[16px] leading-none" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
+                    Contato
+                </a>
             </div>
             
-            <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20Ag%C3%AAncia%20C%26K%20e%20gostaria%20de%20comprar%20uma%20passagem." target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center space-x-2 bg-vibrant-gold text-deep-navy px-6 py-3 rounded-lg font-label-caps text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#12205C] transition-all" aria-label="Compre pelo WhatsApp">
-                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
+            <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20Ag%C3%AAncia%20C%26K%20e%20gostaria%20de%20comprar%20uma%20passagem." target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center gap-2 bg-vibrant-gold text-deep-navy px-5 py-2.5 rounded-full font-headline-md font-bold text-[13px] tracking-tight hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#12205C] transition-all" aria-label="Compre pelo WhatsApp">
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
                 <span>Compre pelo WhatsApp</span>
             </a>
             
@@ -85,7 +101,7 @@
             <a href="#contato" class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Contato</a>
         </nav>
         <div class="mt-auto pt-8 border-t border-outline-variant/30">
-            <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20Ag%C3%AAncia%20C%26K%20e%20gostaria%20de%20comprar%20uma%20passagem." target="_blank" rel="noopener noreferrer" class="flex items-center justify-center space-x-2 w-full bg-vibrant-gold text-deep-navy px-6 py-4 rounded-lg font-label-caps text-label-caps font-bold">
+            <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20Ag%C3%AAncia%20C%26K%20e%20gostaria%20de%20comprar%20uma%20passagem." target="_blank" rel="noopener noreferrer" class="flex items-center justify-center space-x-2 w-full bg-vibrant-gold text-deep-navy px-6 py-4 rounded-lg font-body-md text-label-caps font-bold">
                 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
                 <span>Compre pelo WhatsApp</span>
             </a>
@@ -99,8 +115,7 @@
         <header class="relative w-full h-[884px] min-h-[600px] flex items-center pt-24 overflow-hidden">
             <div class="absolute inset-0 z-0">
                 <picture class="absolute inset-0 w-full h-full block">
-                    <source srcset="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=600 600w, https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1200 1200w, https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=2000 2000w" sizes="100vw" type="image/webp">
-                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=2000" alt="Ônibus moderno em estrada aberta rumo ao interior da Bahia" class="w-full h-full object-cover object-center parallax-bg scale-110" data-speed="0.8" fetchpriority="high">
+                    <img src="./assets/images/hero-onibus.jpg" alt="Ônibus moderno em estrada aberta rumo ao interior da Bahia" class="w-full h-full object-cover object-center parallax-bg scale-110" data-speed="0.8" fetchpriority="high">
                 </picture>
                 <div class="absolute inset-0 bg-deep-navy/70 mix-blend-multiply"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-deep-navy via-deep-navy/40 to-transparent"></div>
@@ -115,12 +130,12 @@
                     Conectamos você ao interior da Bahia com as melhores viações parceiras. Atendimento presencial e humanizado na Praça da Árvore.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 md:ml-2">
-                    <a href="#viacoes" class="flex items-center justify-center space-x-2 bg-vibrant-gold text-deep-navy px-8 py-4 rounded-lg font-label-caps text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#12205C] transition-all text-lg">
+                    <a href="#viacoes" class="flex items-center justify-center gap-2 bg-vibrant-gold text-deep-navy px-8 py-4 rounded-full font-sans font-bold text-[15px] tracking-tight hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#12205C] transition-all">
                         <span>Conheça nossas viações</span>
-                        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                        <span class="material-symbols-outlined text-[20px]" aria-hidden="true">arrow_forward</span>
                     </a>
-                    <a href="https://wa.me/5511954047211?text=Ol%C3%A1%21%20Gostaria%20de%20consultar%20os%20hor%C3%A1rios%20e%20comprar%20uma%20passagem." target="_blank" rel="noopener noreferrer" class="flex items-center justify-center space-x-2 border border-pure-white/40 text-pure-white px-8 py-4 rounded-lg font-label-caps text-label-caps font-bold hover:border-vibrant-gold hover:text-vibrant-gold transition-all text-lg">
-                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
+                    <a href="https://wa.me/5511954047211?text=Ol%C3%A1%21%20Gostaria%20de%20consultar%20os%20hor%C3%A1rios%20e%20comprar%20uma%20passagem." target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 border border-pure-white/40 text-pure-white px-8 py-4 rounded-full font-sans font-bold text-[15px] tracking-tight hover:border-vibrant-gold hover:text-vibrant-gold transition-all">
+                        <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
                         <span>Fale no WhatsApp</span>
                     </a>
                 </div>
@@ -151,9 +166,9 @@
                     <!-- Card: Viação Novo Horizonte -->
                     <article class="company-card group relative flex flex-col bg-pure-white/5 border border-pure-white/10 rounded-lg overflow-hidden hover:border-vibrant-gold/60 transition-all duration-300 hover:-translate-y-1 reveal-up" style="transition-delay: 0.1s" aria-label="Viação Novo Horizonte">
                         <div class="p-8 flex-1 flex flex-col">
-                            <!-- Badge tipográfico -->
-                            <div class="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-vibrant-gold/10 border border-vibrant-gold/30 mb-6" aria-hidden="true">
-                                <span class="material-symbols-outlined text-vibrant-gold text-2xl" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+                            <!-- Logo Novo Horizonte -->
+                            <div class="inline-flex items-center justify-center w-[90px] h-[90px] rounded-lg bg-white mb-6 overflow-hidden p-2">
+                                <img src="./assets/images/logo-novo-horizonte.svg" alt="Logo Viação Novo Horizonte" class="w-full h-full object-contain">
                             </div>
                             <div class="font-label-caps text-label-caps text-vibrant-gold mb-2 tracking-widest uppercase">Viação</div>
                             <h3 class="font-headline-md text-headline-md text-pure-white mb-4 leading-snug">Novo Horizonte</h3>
@@ -165,7 +180,7 @@
                                     <span class="material-symbols-outlined text-[16px]" aria-hidden="true">star</span>
                                     <span>6x sem juros</span>
                                 </div>
-                                <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20passagem%20pela%20Via%C3%A7%C3%A3o%20Novo%20Horizonte." target="_blank" rel="noopener noreferrer" id="cta-novo-horizonte" class="flex items-center justify-center space-x-2 w-full bg-vibrant-gold text-deep-navy px-5 py-3 rounded-lg font-label-caps text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(255,255,255,0.2)] transition-all">
+                                <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20passagem%20pela%20Via%C3%A7%C3%A3o%20Novo%20Horizonte." target="_blank" rel="noopener noreferrer" id="cta-novo-horizonte" class="flex items-center justify-center space-x-2 w-full bg-vibrant-gold text-deep-navy px-5 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(255,255,255,0.2)] transition-all">
                                     <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
                                     <span>Consultar Passagem</span>
                                 </a>
@@ -176,8 +191,9 @@
                     <!-- Card: EMTRAM -->
                     <article class="company-card group relative flex flex-col bg-pure-white/5 border border-pure-white/10 rounded-lg overflow-hidden hover:border-vibrant-gold/60 transition-all duration-300 hover:-translate-y-1 reveal-up" style="transition-delay: 0.2s" aria-label="EMTRAM">
                         <div class="p-8 flex-1 flex flex-col">
-                            <div class="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-vibrant-gold/10 border border-vibrant-gold/30 mb-6" aria-hidden="true">
-                                <span class="material-symbols-outlined text-vibrant-gold text-2xl" style="font-variation-settings: 'FILL' 1;">route</span>
+                            <!-- Logo EMTRAM -->
+                            <div class="inline-flex items-center justify-center w-[90px] h-[90px] rounded-lg bg-white mb-6 overflow-hidden p-2">
+                                <img src="./assets/images/logo-emtram.png" alt="Logo EMTRAM" class="w-full h-full object-contain">
                             </div>
                             <div class="font-label-caps text-label-caps text-vibrant-gold mb-2 tracking-widest uppercase">Viação</div>
                             <h3 class="font-headline-md text-headline-md text-pure-white mb-4 leading-snug">EMTRAM</h3>
@@ -189,7 +205,7 @@
                                     <span class="material-symbols-outlined text-[16px]" aria-hidden="true">verified</span>
                                     <span>Rede ampla SP → BA</span>
                                 </div>
-                                <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20passagem%20pela%20EMTRAM." target="_blank" rel="noopener noreferrer" id="cta-emtram" class="flex items-center justify-center space-x-2 w-full bg-vibrant-gold text-deep-navy px-5 py-3 rounded-lg font-label-caps text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(255,255,255,0.2)] transition-all">
+                                <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20passagem%20pela%20EMTRAM." target="_blank" rel="noopener noreferrer" id="cta-emtram" class="flex items-center justify-center space-x-2 w-full bg-vibrant-gold text-deep-navy px-5 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(255,255,255,0.2)] transition-all">
                                     <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
                                     <span>Consultar Passagem</span>
                                 </a>
@@ -200,8 +216,9 @@
                     <!-- Card: Anjos Turismo -->
                     <article class="company-card group relative flex flex-col bg-pure-white/5 border border-pure-white/10 rounded-lg overflow-hidden hover:border-vibrant-gold/60 transition-all duration-300 hover:-translate-y-1 reveal-up" style="transition-delay: 0.3s" aria-label="Anjos Turismo">
                         <div class="p-8 flex-1 flex flex-col">
-                            <div class="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-vibrant-gold/10 border border-vibrant-gold/30 mb-6" aria-hidden="true">
-                                <span class="material-symbols-outlined text-vibrant-gold text-2xl" style="font-variation-settings: 'FILL' 1;">speed</span>
+                            <!-- Logo Anjos Turismo -->
+                            <div class="inline-flex items-center justify-center w-[90px] h-[90px] rounded-lg bg-black mb-6 overflow-hidden p-2">
+                                <img src="./assets/images/logo-anjos-turismo.jfif" alt="Logo Anjos Turismo" class="w-full h-full object-contain">
                             </div>
                             <div class="font-label-caps text-label-caps text-vibrant-gold mb-2 tracking-widest uppercase">Viação</div>
                             <h3 class="font-headline-md text-headline-md text-pure-white mb-4 leading-snug">Anjos Turismo</h3>
@@ -213,7 +230,7 @@
                                     <span class="material-symbols-outlined text-[16px]" aria-hidden="true">schedule</span>
                                     <span>2x por semana</span>
                                 </div>
-                                <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20passagem%20pela%20Anjos%20Turismo%20%28SP%20x%20Irec%C3%AA%29." target="_blank" rel="noopener noreferrer" id="cta-anjos-turismo" class="flex items-center justify-center space-x-2 w-full bg-vibrant-gold text-deep-navy px-5 py-3 rounded-lg font-label-caps text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(255,255,255,0.2)] transition-all">
+                                <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20passagem%20pela%20Anjos%20Turismo%20%28SP%20x%20Irec%C3%AA%29." target="_blank" rel="noopener noreferrer" id="cta-anjos-turismo" class="flex items-center justify-center space-x-2 w-full bg-vibrant-gold text-deep-navy px-5 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(255,255,255,0.2)] transition-all">
                                     <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
                                     <span>Consultar Passagem</span>
                                 </a>
@@ -239,44 +256,7 @@
             </div>
         </section>
 
-        <!-- ============================================================ -->
-        <!-- SEÇÃO: CREDIBILIDADE                                          -->
-        <!-- ============================================================ -->
-        <section class="py-16 bg-cream-canvas border-y border-outline-variant/30" id="credibilidade" aria-label="Nossos diferenciais de confiança">
-            <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 reveal-up">
 
-                    <div class="flex flex-col items-center text-center gap-3">
-                        <div class="w-12 h-12 rounded-full bg-deep-navy flex items-center justify-center" aria-hidden="true">
-                            <span class="material-symbols-outlined text-vibrant-gold text-xl" style="font-variation-settings: 'FILL' 1;">handshake</span>
-                        </div>
-                        <p class="font-label-caps text-label-caps text-deep-navy leading-snug">Parceira oficial de 3 viações renomadas</p>
-                    </div>
-
-                    <div class="flex flex-col items-center text-center gap-3">
-                        <div class="w-12 h-12 rounded-full bg-deep-navy flex items-center justify-center" aria-hidden="true">
-                            <span class="material-symbols-outlined text-vibrant-gold text-xl" style="font-variation-settings: 'FILL' 1;">support_agent</span>
-                        </div>
-                        <p class="font-label-caps text-label-caps text-deep-navy leading-snug">Atendimento direto, sem intermediários</p>
-                    </div>
-
-                    <div class="flex flex-col items-center text-center gap-3">
-                        <div class="w-12 h-12 rounded-full bg-deep-navy flex items-center justify-center" aria-hidden="true">
-                            <span class="material-symbols-outlined text-vibrant-gold text-xl" style="font-variation-settings: 'FILL' 1;">store</span>
-                        </div>
-                        <p class="font-label-caps text-label-caps text-deep-navy leading-snug">Endereço físico na Praça da Árvore</p>
-                    </div>
-
-                    <div class="flex flex-col items-center text-center gap-3">
-                        <div class="w-12 h-12 rounded-full bg-deep-navy flex items-center justify-center" aria-hidden="true">
-                            <span class="material-symbols-outlined text-vibrant-gold text-xl" style="font-variation-settings: 'FILL' 1;">payments</span>
-                        </div>
-                        <p class="font-label-caps text-label-caps text-deep-navy leading-snug">Parcelamento facilitado em até 6x sem juros</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
 
         <!-- ============================================================ -->
         <!-- SEÇÃO: DESTINOS                                               -->
@@ -286,7 +266,7 @@
                 <h2 id="destinos-title" class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-deep-navy max-w-2xl">
                     Destinos Atendidos pelas <span class="italic text-vibrant-gold">Parceiras</span>
                 </h2>
-                <a href="destinos.html" class="font-label-caps text-label-caps text-deep-navy border-b border-deep-navy pb-1 hover:text-vibrant-gold hover:border-vibrant-gold transition-colors inline-flex items-center group">
+                <a href="destinos.html" class="font-body-md font-medium text-label-caps text-deep-navy border-b border-deep-navy pb-1 hover:text-vibrant-gold hover:border-vibrant-gold transition-colors inline-flex items-center group">
                     Ver todos os destinos
                     <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true">east</span>
                 </a>
@@ -297,8 +277,7 @@
                 <!-- Card: Lapão -->
                 <div class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up" style="transition-delay: 0.1s">
                     <picture class="absolute inset-0 w-full h-full block">
-                        <source srcset="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&q=80&w=800" type="image/webp">
-                        <img src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&q=80&w=800" alt="Paisagem em Lapão, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <img src="./assets/images/destino-lapao.jpeg" alt="Paisagem em Lapão, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                     </picture>
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/90 via-deep-navy/20 to-transparent destination-overlay pointer-events-none"></div>
                     <div class="absolute top-4 right-4 z-10">
@@ -315,8 +294,7 @@
                 <!-- Card: Canarana -->
                 <div class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up" style="transition-delay: 0.2s">
                     <picture class="absolute inset-0 w-full h-full block">
-                        <source srcset="https://images.unsplash.com/photo-1533596664476-02796e6d1c82?auto=format&fit=crop&q=80&w=800" type="image/webp">
-                        <img src="https://images.unsplash.com/photo-1533596664476-02796e6d1c82?auto=format&fit=crop&q=80&w=800" alt="Cenários em Canarana, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <img src="./assets/images/destino-canarana.jpg" alt="Cenários em Canarana, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                     </picture>
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/90 via-deep-navy/20 to-transparent destination-overlay pointer-events-none"></div>
                     <div class="absolute top-4 right-4 z-10">
@@ -330,20 +308,19 @@
                     </div>
                 </div>
                 
-                <!-- Card: Morro do Chapéu -->
+                <!-- Card: Souto Soares -->
                 <div class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up" style="transition-delay: 0.3s">
                     <picture class="absolute inset-0 w-full h-full block">
-                        <source srcset="https://images.unsplash.com/photo-1518182170546-076616fd4cb6?auto=format&fit=crop&q=80&w=800" type="image/webp">
-                        <img src="https://images.unsplash.com/photo-1518182170546-076616fd4cb6?auto=format&fit=crop&q=80&w=800" alt="Formações geológicas no Morro do Chapéu, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <img src="./assets/images/destino-souto-soares.jfif" alt="Paisagem em Souto Soares, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                     </picture>
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/90 via-deep-navy/20 to-transparent destination-overlay pointer-events-none"></div>
                     <div class="absolute top-4 right-4 z-10">
                         <span class="font-label-caps text-label-caps text-[10px] bg-deep-navy/80 text-vibrant-gold px-2 py-1 rounded backdrop-blur-sm border border-vibrant-gold/30">via Novo Horizonte</span>
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 z-10 pointer-events-none">
-                        <h3 class="font-headline-md text-headline-md text-pure-white mb-2 transition-transform duration-500 group-hover:-translate-y-2">Morro do Chapéu</h3>
+                        <h3 class="font-headline-md text-headline-md text-pure-white mb-2 transition-transform duration-500 group-hover:-translate-y-2">Souto Soares</h3>
                         <p class="font-label-caps text-label-caps text-surface-variant flex items-center opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 duration-500">
-                            Turismo ecológico <span class="material-symbols-outlined text-[16px] ml-2" aria-hidden="true">trending_flat</span>
+                            Chapada Diamantina <span class="material-symbols-outlined text-[16px] ml-2" aria-hidden="true">trending_flat</span>
                         </p>
                     </div>
                 </div>
@@ -351,8 +328,7 @@
                 <!-- Card: Seabra -->
                 <div class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up" style="transition-delay: 0.4s">
                     <picture class="absolute inset-0 w-full h-full block">
-                        <source srcset="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800" type="image/webp">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800" alt="Paisagem serrana de Seabra, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <img src="./assets/images/destino-seabra.jpg" alt="Paisagem serrana de Seabra, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                     </picture>
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/90 via-deep-navy/20 to-transparent destination-overlay pointer-events-none"></div>
                     <div class="absolute top-4 right-4 z-10">
@@ -369,8 +345,7 @@
                 <!-- Card: Iraquara -->
                 <div class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up" style="transition-delay: 0.5s">
                     <picture class="absolute inset-0 w-full h-full block">
-                        <source srcset="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&q=80&w=800" type="image/webp">
-                        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&q=80&w=800" alt="Natureza exuberante em Iraquara, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <img src="./assets/images/destino-iraquara.jpeg" alt="Natureza exuberante em Iraquara, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                     </picture>
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/90 via-deep-navy/20 to-transparent destination-overlay pointer-events-none"></div>
                     <div class="absolute top-4 right-4 z-10">
@@ -387,8 +362,7 @@
                 <!-- Card: Irecê -->
                 <div class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up" style="transition-delay: 0.6s">
                     <picture class="absolute inset-0 w-full h-full block">
-                        <source srcset="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800" type="image/webp">
-                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800" alt="Horizonte e paisagem de Irecê, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <img src="./assets/images/destino-irece.jpg" alt="Horizonte e paisagem de Irecê, Bahia" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                     </picture>
                     <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/90 via-deep-navy/20 to-transparent destination-overlay pointer-events-none"></div>
                     <div class="absolute top-4 right-4 z-10">
@@ -439,7 +413,7 @@
                             <span class="block font-display-xl text-[56px] font-extrabold text-vibrant-gold leading-none drop-shadow-sm">6x</span>
                             <span class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">sem juros</span>
                         </div>
-                        <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20vi%20a%20promo%C3%A7%C3%A3o%20da%20Novo%20Horizonte%20em%20at%C3%A9%206x%20sem%20juros%20e%20quero%20garantir%20minha%20passagem%21" target="_blank" rel="noopener noreferrer" class="bg-deep-navy text-vibrant-gold px-8 py-3 rounded-lg font-label-caps text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
+                        <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20vi%20a%20promo%C3%A7%C3%A3o%20da%20Novo%20Horizonte%20em%20at%C3%A9%206x%20sem%20juros%20e%20quero%20garantir%20minha%20passagem%21" target="_blank" rel="noopener noreferrer" class="bg-deep-navy text-vibrant-gold px-8 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
                             Garantir Oferta
                         </a>
                     </div>
@@ -459,7 +433,7 @@
                             <span class="block font-display-xl text-[56px] font-extrabold text-vibrant-gold leading-none drop-shadow-sm">200+</span>
                             <span class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">destinos</span>
                         </div>
-                        <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20passagens%20pela%20EMTRAM%21" target="_blank" rel="noopener noreferrer" class="bg-deep-navy text-vibrant-gold px-8 py-3 rounded-lg font-label-caps text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
+                        <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20passagens%20pela%20EMTRAM%21" target="_blank" rel="noopener noreferrer" class="bg-deep-navy text-vibrant-gold px-8 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
                             Consultar Horários
                         </a>
                     </div>
@@ -478,7 +452,7 @@
                             <span class="block font-display-xl text-[56px] font-extrabold text-vibrant-gold leading-none drop-shadow-sm">2×</span>
                             <span class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">por semana</span>
                         </div>
-                        <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20passagem%20pela%20Anjos%20Turismo%20de%20SP%20para%20Irec%C3%AA%21" target="_blank" rel="noopener noreferrer" class="bg-deep-navy text-vibrant-gold px-8 py-3 rounded-lg font-label-caps text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
+                        <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20passagem%20pela%20Anjos%20Turismo%20de%20SP%20para%20Irec%C3%AA%21" target="_blank" rel="noopener noreferrer" class="bg-deep-navy text-vibrant-gold px-8 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
                             Garantir Minha Vaga
                         </a>
                     </div>
@@ -566,9 +540,9 @@
             </div>
             
             <nav class="flex flex-wrap justify-center gap-6 mb-8 md:mb-0" aria-label="Rodapé">
-                <a href="termos.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-label-caps text-label-caps opacity-80 hover:opacity-100">Termos de Uso</a>
-                <a href="privacidade.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-label-caps text-label-caps opacity-80 hover:opacity-100">Política de Privacidade</a>
-                <a href="sac.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-label-caps text-label-caps opacity-80 hover:opacity-100">SAC</a>
+                <a href="termos.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-body-md font-medium text-label-caps opacity-80 hover:opacity-100">Termos de Uso</a>
+                <a href="privacidade.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-body-md font-medium text-label-caps opacity-80 hover:opacity-100">Política de Privacidade</a>
+                <a href="sac.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-body-md font-medium text-label-caps opacity-80 hover:opacity-100">SAC</a>
             </nav>
             
             <div class="text-surface-variant font-body-md text-body-md text-center md:text-right">

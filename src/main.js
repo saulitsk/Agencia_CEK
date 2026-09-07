@@ -16,6 +16,31 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // --- 2b. Smooth anchor navigation ---
+    // Intercept every in-page # link and route through Lenis (or native smooth scroll).
+    // The nav bar is ~64px tall; we offset by -80px to give the section a comfortable top margin.
+    const NAV_OFFSET = -80;
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+            const hash = anchor.getAttribute('href');
+            if (hash === '#') return; // Skip bare # links
+
+            const target = document.querySelector(hash);
+            if (!target) return;
+
+            e.preventDefault();
+
+            if (lenis) {
+                lenis.scrollTo(target, { offset: NAV_OFFSET, duration: 1.2 });
+            } else {
+                // Fallback: native smooth scroll with manual offset
+                const top = target.getBoundingClientRect().top + window.scrollY + NAV_OFFSET;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }
+        });
+    });
+
     // --- 3. Reactive Header ---
     const nav = document.getElementById('main-nav');
     let lastScrollY = window.scrollY;
@@ -142,5 +167,49 @@ document.addEventListener("DOMContentLoaded", () => {
                 toggleMenu(false);
             }
         });
+    }
+
+    // --- 7. Active Nav Link (IntersectionObserver) ---
+    const navLinks = document.querySelectorAll('.nav-link[data-section]');
+    if (navLinks.length > 0) {
+        const sectionIds = Array.from(navLinks).map(l => l.dataset.section);
+        const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+        // Track which sections are currently intersecting
+        const visibleSections = new Set();
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    visibleSections.add(entry.target.id);
+                } else {
+                    visibleSections.delete(entry.target.id);
+                }
+            });
+
+            // Find the topmost visible section (first in DOM order)
+            let activeId = null;
+            for (const id of sectionIds) {
+                if (visibleSections.has(id)) {
+                    activeId = id;
+                    break;
+                }
+            }
+
+            navLinks.forEach(link => {
+                if (link.dataset.section === activeId) {
+                    link.classList.add('is-active');
+                } else {
+                    link.classList.remove('is-active');
+                }
+            });
+        }, {
+            root: null,
+            // Trigger when section occupies the middle 40% of the viewport
+            rootMargin: '-30% 0px -30% 0px',
+            threshold: 0,
+        });
+
+        sections.forEach(section => sectionObserver.observe(section));
     }
 });

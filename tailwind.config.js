@@ -77,9 +77,9 @@ export default {
       fontFamily: {
         "headline-md": ["Plus Jakarta Sans"],
         "display-xl": ["Plus Jakarta Sans"],
-        "label-caps": ["JetBrains Mono"],
-        "body-lg": ["Hanken Grotesk"],
-        "body-md": ["Hanken Grotesk"],
+        "label-caps": ["Plus Jakarta Sans"],
+        "body-lg": ["Plus Jakarta Sans"],
+        "body-md": ["Plus Jakarta Sans"],
         "headline-lg-mobile": ["Plus Jakarta Sans"],
         "headline-lg": ["Plus Jakarta Sans"]
       },
