@@ -157,3 +157,88 @@
     color: #12205C;
     transform: translateY(-1px);
 }
+
+/* ============================================================
+   Destination Search — Autocomplete Dropdown
+   ============================================================ */
+.suggestions-dropdown {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(18, 32, 92, 0.2) transparent;
+}
+
+.suggestions-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.suggestions-dropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.suggestions-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(18, 32, 92, 0.2);
+    border-radius: 3px;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    color: #454650;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    border-bottom: 1px solid rgba(198, 197, 209, 0.25);
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item.is-selected {
+    background-color: rgba(244, 185, 62, 0.12);
+    color: #12205C;
+}
+
+.suggestion-item.suggestion-empty {
+    color: #767681;
+    cursor: default;
+    font-style: italic;
+}
+
+.suggestion-item.suggestion-empty:hover {
+    background-color: transparent;
+    color: #767681;
+}
+
+/* ============================================================
+   Search Hero — background subtle zoom
+   ============================================================ */
+.search-hero > .absolute:first-child img {
+    animation: heroZoom 25s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+    0%   { transform: scale(1.10); }
+    100% { transform: scale(1.18); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .search-hero > .absolute:first-child img {
+        animation: none;
+    }
+}
+
+/* Search field groups */
+.search-field-group label {
+    display: flex;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+}
+
+/* Date input consistent height */
+input[type="date"] {
+    min-height: 50px;
+}

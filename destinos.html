@@ -3,30 +3,62 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Destinos - Agência C&K</title>
     
+    <title>Buscar Destinos — Agência C&K</title>
+    <meta name="description" content="Busque passagens de São Paulo para mais de 200 cidades no interior da Bahia. Encontre seu destino e consulte valores pelo WhatsApp.">
+    <meta property="og:title" content="Buscar Destinos — Agência C&K">
+    <meta property="og:description" content="Encontre passagens de ônibus de São Paulo para a Bahia com a Agência C&K.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet"/>
+    
     <link rel="stylesheet" href="./src/style.css">
 </head>
 <body class="bg-surface text-on-surface antialiased overflow-x-hidden selection:bg-vibrant-gold selection:text-deep-navy">
     
-    <!-- TopNavBar -->
+    <!-- Skip to content for Accessibility -->
+    <a href="#main-content" class="skip-link font-body-md font-medium text-label-caps">Pular para o conteúdo principal</a>
+
+    <!-- TopNavBar (consistent with secondary pages) -->
     <nav class="fixed top-0 w-full z-50 transition-transform duration-300 bg-deep-navy/95 backdrop-blur shadow-md" id="main-nav" aria-label="Navegação Principal">
         <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base max-w-[1440px] mx-auto">
-            <a href="index.html" class="font-headline-md text-headline-md font-bold text-vibrant-gold drop-shadow-md outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold focus-visible:rounded-sm">
+            <a href="index.html" class="font-headline-md text-headline-md font-bold text-vibrant-gold drop-shadow-md outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold focus-visible:rounded-sm" aria-label="Agência C&K, página inicial">
                 Agência C&K
             </a>
             
-            <div class="hidden md:flex space-x-8 items-center">
-                <a href="index.html#destinos" class="text-pure-white hover:text-vibrant-gold transition-colors font-body-md font-medium text-label-caps hover:scale-105 hover:shadow-[0px_4px_0px_0px_rgba(18,32,92,1)] transition-all">Destinos</a>
-                <a href="index.html#promocoes" class="text-pure-white hover:text-vibrant-gold transition-colors font-body-md font-medium text-label-caps hover:scale-105 hover:shadow-[0px_4px_0px_0px_rgba(18,32,92,1)] transition-all">Promoções</a>
-                <a href="index.html#sobre" class="text-pure-white hover:text-vibrant-gold transition-colors font-body-md font-medium text-label-caps hover:scale-105 hover:shadow-[0px_4px_0px_0px_rgba(18,32,92,1)] transition-all">Sobre</a>
-                <a href="index.html#contato" class="text-pure-white hover:text-vibrant-gold transition-colors font-body-md font-medium text-label-caps hover:scale-105 hover:shadow-[0px_4px_0px_0px_rgba(18,32,92,1)] transition-all">Contato</a>
+            <div class="hidden md:flex items-center gap-1 px-2 py-2 rounded-full nav-pill" id="nav-pill">
+                <a href="index.html#viacoes" class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200">
+                    <span class="material-symbols-outlined text-[16px] leading-none" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">directions_bus</span>
+                    Nossas Viações
+                </a>
+                <a href="index.html#destinos" class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200">
+                    <span class="material-symbols-outlined text-[16px] leading-none" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">map</span>
+                    Destinos
+                </a>
+                <a href="index.html#promocoes" class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200">
+                    <span class="material-symbols-outlined text-[16px] leading-none" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">sell</span>
+                    Promoções
+                </a>
+                <a href="index.html#sobre" class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200">
+                    <span class="material-symbols-outlined text-[16px] leading-none" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">info</span>
+                    Sobre
+                </a>
+                <a href="index.html#contato" class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200">
+                    <span class="material-symbols-outlined text-[16px] leading-none" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
+                    Contato
+                </a>
             </div>
+
+            <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20Ag%C3%AAncia%20C%26K%20e%20gostaria%20de%20comprar%20uma%20passagem." target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center gap-2 bg-vibrant-gold text-deep-navy px-5 py-2.5 rounded-full font-headline-md font-bold text-[13px] tracking-tight hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#12205C] transition-all" aria-label="Compre pelo WhatsApp">
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
+                <span>Compre pelo WhatsApp</span>
+            </a>
             
+            <!-- Mobile Menu Toggle -->
             <button id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu mobile" class="md:hidden text-pure-white p-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold">
                 <span class="material-symbols-outlined text-3xl" aria-hidden="true">menu</span>
             </button>
@@ -42,25 +74,148 @@
             </button>
         </div>
         <nav class="flex flex-col space-y-8" aria-label="Navegação Mobile">
+            <a href="index.html#viacoes" class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Nossas Viações</a>
             <a href="index.html#destinos" class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Destinos</a>
             <a href="index.html#promocoes" class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Promoções</a>
             <a href="index.html#sobre" class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Sobre</a>
             <a href="index.html#contato" class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Contato</a>
         </nav>
+        <div class="mt-auto pt-8 border-t border-outline-variant/30">
+            <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20Ag%C3%AAncia%20C%26K%20e%20gostaria%20de%20comprar%20uma%20passagem." target="_blank" rel="noopener noreferrer" class="flex items-center justify-center space-x-2 w-full bg-vibrant-gold text-deep-navy px-6 py-4 rounded-lg font-body-md text-label-caps font-bold">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
+                <span>Compre pelo WhatsApp</span>
+            </a>
+        </div>
     </div>
 
-    <main class="min-h-screen pt-32 pb-section-gap px-margin-mobile md:px-margin-desktop flex flex-col items-center justify-center text-center">
-        <span class="material-symbols-outlined text-6xl text-vibrant-gold mb-6" aria-hidden="true">construction</span>
-        <h1 class="font-display-xl text-headline-lg-mobile md:text-headline-lg text-deep-navy mb-4">Página em Construção</h1>
-        <p class="font-body-lg text-body-lg text-surface-variant max-w-xl mb-8">Esta página de Destinos está sendo desenvolvida e logo receberá conteúdo real.</p>
-        <a href="index.html" class="flex items-center space-x-2 bg-deep-navy text-pure-white px-8 py-4 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#F4B93E] transition-all">
-            <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
-            <span>Voltar para a Home</span>
-        </a>
+    <main id="main-content">
+        <!-- ============================================================ -->
+        <!-- HERO + SEARCH CARD                                           -->
+        <!-- ============================================================ -->
+        <section class="search-hero relative w-full min-h-screen flex items-center justify-center pt-20 pb-16 px-margin-mobile md:px-margin-desktop overflow-hidden">
+            <!-- Background: reutiliza a foto do hero principal -->
+            <div class="absolute inset-0 z-0">
+                <picture class="absolute inset-0 w-full h-full block">
+                    <img src="./assets/images/hero-onibus.jpg" alt="" class="w-full h-full object-cover object-center scale-110" aria-hidden="true" fetchpriority="high">
+                </picture>
+                <div class="absolute inset-0 bg-deep-navy/75 mix-blend-multiply"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-deep-navy/60 via-deep-navy/30 to-deep-navy/80"></div>
+            </div>
+
+            <div class="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center">
+                <!-- Header text -->
+                <div class="text-center mb-8 reveal-up">
+                    <div class="font-label-caps text-label-caps text-vibrant-gold mb-3 tracking-widest uppercase">Buscar Passagens</div>
+                    <h1 class="font-display-xl text-headline-lg-mobile md:text-headline-lg text-pure-white mb-3 tracking-tight">
+                        Para onde você <span class="italic text-vibrant-gold">vai?</span>
+                    </h1>
+                    <p class="font-body-lg text-body-lg text-surface-variant max-w-lg mx-auto">
+                        Encontre passagens de São Paulo para mais de 200 cidades no interior da Bahia.
+                    </p>
+                </div>
+
+                <!-- Search Card -->
+                <div class="w-full bg-cream-canvas rounded-xl shadow-2xl p-6 md:p-10 border border-vibrant-gold/20 reveal-up" style="transition-delay: 0.15s">
+                    <form id="busca-form" class="flex flex-col gap-5" novalidate>
+                        
+                        <!-- Origem (fixo) -->
+                        <div class="search-field-group">
+                            <label for="origem-input" class="font-label-caps text-label-caps text-deep-navy/70 mb-1.5 flex items-center gap-1.5 tracking-widest uppercase">
+                                <span class="material-symbols-outlined text-[16px] text-vibrant-gold" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">trip_origin</span>
+                                Origem
+                            </label>
+                            <div class="relative">
+                                <input
+                                    type="text"
+                                    id="origem-input"
+                                    value="São Paulo - SP"
+                                    disabled
+                                    class="w-full bg-surface-container border border-outline-variant/40 rounded-lg px-4 py-3.5 font-body-md text-body-md text-on-surface/60 cursor-not-allowed"
+                                    aria-label="Origem: São Paulo"
+                                >
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-[18px] text-outline/40" aria-hidden="true">lock</span>
+                            </div>
+                        </div>
+
+                        <!-- Destino (autocomplete) -->
+                        <div class="search-field-group">
+                            <label for="destino-input" class="font-label-caps text-label-caps text-deep-navy/70 mb-1.5 flex items-center gap-1.5 tracking-widest uppercase">
+                                <span class="material-symbols-outlined text-[16px] text-vibrant-gold" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">location_on</span>
+                                Destino
+                            </label>
+                            <div class="relative">
+                                <input
+                                    type="text"
+                                    id="destino-input"
+                                    placeholder="Digite o nome da cidade…"
+                                    autocomplete="off"
+                                    role="combobox"
+                                    aria-expanded="false"
+                                    aria-autocomplete="list"
+                                    aria-controls="destino-suggestions"
+                                    aria-haspopup="listbox"
+                                    class="w-full bg-pure-white border border-outline-variant/40 rounded-lg px-4 py-3.5 font-body-md text-body-md text-on-surface placeholder:text-outline/50 focus:border-vibrant-gold focus:ring-2 focus:ring-vibrant-gold/30 transition-all"
+                                >
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-[18px] text-outline/50" aria-hidden="true">search</span>
+                                
+                                <!-- Suggestions dropdown -->
+                                <ul
+                                    id="destino-suggestions"
+                                    role="listbox"
+                                    aria-label="Sugestões de destino"
+                                    class="suggestions-dropdown hidden absolute left-0 right-0 top-full mt-1 bg-pure-white border border-outline-variant/30 rounded-lg shadow-xl max-h-[240px] overflow-y-auto z-30"
+                                ></ul>
+                            </div>
+                        </div>
+
+                        <!-- Data de Ida -->
+                        <div class="search-field-group">
+                            <label for="data-ida" class="font-label-caps text-label-caps text-deep-navy/70 mb-1.5 flex items-center gap-1.5 tracking-widest uppercase">
+                                <span class="material-symbols-outlined text-[16px] text-vibrant-gold" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">calendar_month</span>
+                                Data de Ida
+                            </label>
+                            <input
+                                type="date"
+                                id="data-ida"
+                                required
+                                class="w-full bg-pure-white border border-outline-variant/40 rounded-lg px-4 py-3.5 font-body-md text-body-md text-on-surface focus:border-vibrant-gold focus:ring-2 focus:ring-vibrant-gold/30 transition-all"
+                                aria-label="Data de ida"
+                            >
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="border-t border-deep-navy/10 my-1"></div>
+
+                        <!-- CTA -->
+                        <button
+                            type="submit"
+                            id="btn-ver-valores"
+                            disabled
+                            class="w-full flex items-center justify-center gap-2 bg-vibrant-gold text-deep-navy px-8 py-4 rounded-lg font-headline-md font-bold text-[15px] tracking-tight transition-all duration-200 opacity-50 cursor-not-allowed"
+                        >
+                            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
+                            Ver valores
+                            <span class="material-symbols-outlined text-[18px] ml-1" aria-hidden="true">arrow_forward</span>
+                        </button>
+
+                        <p class="text-center font-body-md text-[13px] text-on-surface/50 -mt-1">
+                            <span class="material-symbols-outlined text-[14px] align-middle mr-0.5" aria-hidden="true">info</span>
+                            Você será redirecionado para o WhatsApp da agência
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Back link -->
+                <a href="index.html" class="mt-6 inline-flex items-center gap-2 text-pure-white/70 hover:text-vibrant-gold font-body-md text-[14px] transition-colors reveal-up" style="transition-delay: 0.3s">
+                    <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_back</span>
+                    Voltar para a página inicial
+                </a>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-deep-navy w-full border-t border-outline-variant flat no shadows mt-auto">
+    <footer class="bg-deep-navy w-full border-t border-outline-variant/20">
         <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-section-gap w-full max-w-[1440px] mx-auto">
             <div class="font-headline-md text-headline-md text-vibrant-gold mb-8 md:mb-0">
                 Agência C&K
@@ -69,15 +224,14 @@
             <nav class="flex flex-wrap justify-center gap-6 mb-8 md:mb-0" aria-label="Rodapé">
                 <a href="termos.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-body-md font-medium text-label-caps opacity-80 hover:opacity-100">Termos de Uso</a>
                 <a href="privacidade.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-body-md font-medium text-label-caps opacity-80 hover:opacity-100">Política de Privacidade</a>
-                <a href="sac.html" class="text-surface-variant hover:text-vibrant-gold transition-colors font-body-md font-medium text-label-caps opacity-80 hover:opacity-100">SAC</a>
             </nav>
             
             <div class="text-surface-variant font-body-md text-body-md text-center md:text-right">
-                © 2024 Agência C&K. Parceiro Oficial Viação Novo Horizonte.
+                © 2026 Agência C&K. Passagens para a Bahia com confiança.
             </div>
         </div>
     </footer>
     
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/busca-destinos.js"></script>
 </body>
 </html>
