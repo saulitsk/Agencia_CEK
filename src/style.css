@@ -212,6 +212,37 @@
     color: #767681;
 }
 
+/* Fallback: "Consultar este destino" */
+.suggestion-item.suggestion-fallback {
+    border-top: 1px dashed rgba(198, 197, 209, 0.4);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 14px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.suggestion-item.suggestion-fallback:hover,
+.suggestion-item.suggestion-fallback.is-selected {
+    background-color: rgba(244, 185, 62, 0.12);
+    color: #12205C;
+}
+
+/* ============================================================
+   Destination Listing by State
+   ============================================================ */
+.listagem-uf-group {
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(198, 197, 209, 0.3);
+}
+
+.listagem-uf-group:last-of-type {
+    border-bottom: none;
+}
+
+.listagem-uf-primary {
+    padding-bottom: 32px;
+}
+
 /* ============================================================
    Search Hero — background subtle zoom
    ============================================================ */

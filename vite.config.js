@@ -10,7 +10,6 @@ export default defineConfig({
         destinos: resolve(__dirname, 'destinos.html'),
         termos: resolve(__dirname, 'termos.html'),
         privacidade: resolve(__dirname, 'privacidade.html'),
-        sac: resolve(__dirname, 'sac.html'),
       },
     },
   },
