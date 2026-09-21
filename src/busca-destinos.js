@@ -3,7 +3,7 @@
  * Lógica da página de busca de destinos (destinos.html).
  * — Autocomplete com busca normalizada (sem acentos)
  * — Fallback para destino fora do cadastro
- * — Data opcional
+ * — Data opcional com validação de data passada
  * — Listagem completa agrupada por UF
  * — Redirecionamento para WhatsApp com mensagem dinâmica
  */
@@ -28,18 +28,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!inputDestino || !listaSugestoes || !btnConsultar) return;
 
-  // --- Definir data mínima como hoje ---
+  // --- Elemento de erro para data ---
+  let dataErroEl = null;
   if (inputData) {
+    dataErroEl = document.createElement('p');
+    dataErroEl.className = 'font-body-md text-[13px] text-error mt-1 hidden';
+    dataErroEl.setAttribute('role', 'alert');
+    dataErroEl.id = 'data-ida-erro';
+    inputData.parentElement.appendChild(dataErroEl);
+    inputData.setAttribute('aria-describedby', 'data-ida-erro');
+  }
+
+  // --- Definir data mínima como hoje ---
+  function getHojeStr() {
     const hoje = new Date();
-    const anoAtual = hoje.getFullYear();
-    const mesAtual = String(hoje.getMonth() + 1).padStart(2, '0');
-    const diaAtual = String(hoje.getDate()).padStart(2, '0');
-    inputData.min = `${anoAtual}-${mesAtual}-${diaAtual}`;
+    const ano = hoje.getFullYear();
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+    const dia = String(hoje.getDate()).padStart(2, '0');
+    return `${ano}-${mes}-${dia}`;
+  }
+
+  if (inputData) {
+    inputData.min = getHojeStr();
   }
 
   let selectedIndex = -1;
   /** @type {{ nome: string, uf: string } | null} */
   let destinoSelecionado = null;
+
+  // --- Validação de data ---
+  function validarData() {
+    if (!inputData || !inputData.value) {
+      // Sem data preenchida → válida (data é opcional)
+      if (dataErroEl) {
+        dataErroEl.textContent = '';
+        dataErroEl.classList.add('hidden');
+      }
+      if (inputData) inputData.classList.remove('border-error');
+      return true;
+    }
+
+    const hojeStr = getHojeStr();
+    if (inputData.value < hojeStr) {
+      if (dataErroEl) {
+        dataErroEl.textContent = 'A data não pode ser anterior a hoje.';
+        dataErroEl.classList.remove('hidden');
+      }
+      inputData.classList.add('border-error');
+      return false;
+    }
+
+    if (dataErroEl) {
+      dataErroEl.textContent = '';
+      dataErroEl.classList.add('hidden');
+    }
+    inputData.classList.remove('border-error');
+    return true;
+  }
 
   // --- Autocomplete ---
   function renderSugestoes(filtro) {
@@ -47,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const termoNorm = normalizar(termo);
     listaSugestoes.innerHTML = '';
     selectedIndex = -1;
+    inputDestino.removeAttribute('aria-activedescendant');
 
     if (termoNorm.length === 0) {
       listaSugestoes.classList.add('hidden');
@@ -151,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     listaSugestoes.classList.add('hidden');
     listaSugestoes.innerHTML = '';
     inputDestino.setAttribute('aria-expanded', 'false');
+    inputDestino.removeAttribute('aria-activedescendant');
     selectedIndex = -1;
     validarFormulario();
     if (inputData) inputData.focus();
@@ -159,6 +206,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function consultarDestinoLivre(texto) {
     const textoLimpo = texto.trim();
     if (textoLimpo.length === 0) return;
+
+    // Validar data antes de abrir WhatsApp
+    if (!validarData()) return;
 
     let dataStr = 'a definir';
     if (inputData && inputData.value) {
@@ -188,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       listaSugestoes.classList.add('hidden');
       inputDestino.setAttribute('aria-expanded', 'false');
+      inputDestino.removeAttribute('aria-activedescendant');
     }, 200);
   });
 
@@ -217,6 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (e.key === 'Escape') {
       listaSugestoes.classList.add('hidden');
       inputDestino.setAttribute('aria-expanded', 'false');
+      inputDestino.removeAttribute('aria-activedescendant');
       selectedIndex = -1;
     }
   });
@@ -231,14 +283,21 @@ document.addEventListener('DOMContentLoaded', () => {
         item.classList.remove('is-selected');
       }
     });
+    // If nothing is selected, clear the attribute
+    if (selectedIndex < 0) {
+      inputDestino.removeAttribute('aria-activedescendant');
+    }
   }
 
-  // --- Validação (destino obrigatório, data opcional) ---
+  // --- Validação (destino obrigatório, data opcional mas válida) ---
   function validarFormulario() {
     const destinoPreenchido = destinoSelecionado !== null && inputDestino.value.trim().length > 0;
-    btnConsultar.disabled = !destinoPreenchido;
+    const dataValida = validarData();
+    const formularioValido = destinoPreenchido && dataValida;
 
-    if (destinoPreenchido) {
+    btnConsultar.disabled = !formularioValido;
+
+    if (formularioValido) {
       btnConsultar.classList.remove('opacity-50', 'cursor-not-allowed');
       btnConsultar.classList.add('hover:-translate-y-1', 'hover:shadow-[0px_4px_0px_0px_#12205C]');
     } else {
@@ -258,6 +317,9 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       if (btnConsultar.disabled || !destinoSelecionado) return;
 
+      // Double-check date validity before sending
+      if (!validarData()) return;
+
       let dataStr = 'a definir';
       if (inputData && inputData.value) {
         const [ano, mes, dia] = inputData.value.split('-');
@@ -274,14 +336,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const destinoParam = urlParams.get('destino');
   if (destinoParam) {
+    const termoNorm = normalizar(destinoParam);
     const matches = buscarDestinos(destinoParam);
-    if (matches.length > 0) {
-      // Tenta encontrar correspondência exata primeiro (desconsiderando acentos)
-      const termoNorm = normalizar(destinoParam);
-      const exactMatch = matches.find(d => normalizar(d.nome) === termoNorm) || matches[0];
+
+    // Só seleciona automaticamente se houver correspondência EXATA (ignorando acentos/caixa)
+    const exactMatch = matches.find(d => normalizar(d.nome) === termoNorm);
+
+    if (exactMatch) {
       selecionarCidade(exactMatch);
     } else {
+      // Sem correspondência exata: preenche o campo e mostra sugestões, mas NÃO seleciona
       inputDestino.value = destinoParam;
+      destinoSelecionado = null;
       renderSugestoes(destinoParam);
     }
   }
@@ -360,25 +426,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- Mobile Menu (duplicado para esta página secundária) ---
+  // --- Mobile Menu (with full a11y: aria-hidden, tabindex, focus trap) ---
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileMenuCloseBtn = document.getElementById('mobile-menu-close');
 
   if (mobileMenuBtn && mobileMenu) {
+    const focusableEls = mobileMenu.querySelectorAll('a, button');
+
     const toggleMenu = (open) => {
       const isExpanded = open !== undefined ? open : mobileMenuBtn.getAttribute('aria-expanded') === 'false';
       mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+      mobileMenu.setAttribute('aria-hidden', !isExpanded);
 
       if (isExpanded) {
         mobileMenu.classList.remove('translate-x-full');
         mobileMenu.classList.add('translate-x-0');
         document.body.style.overflow = 'hidden';
+        // Make focusable
+        focusableEls.forEach(el => el.removeAttribute('tabindex'));
         setTimeout(() => mobileMenuCloseBtn?.focus(), 300);
       } else {
         mobileMenu.classList.add('translate-x-full');
         mobileMenu.classList.remove('translate-x-0');
         document.body.style.overflow = '';
+        // Remove from tab order
+        focusableEls.forEach(el => el.setAttribute('tabindex', '-1'));
         mobileMenuBtn.focus();
       }
     };
@@ -386,13 +459,36 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileMenuBtn.addEventListener('click', () => toggleMenu());
     mobileMenuCloseBtn?.addEventListener('click', () => toggleMenu(false));
 
-    mobileMenu.querySelectorAll('a, button').forEach(link => {
+    // Close on link click
+    focusableEls.forEach(link => {
       link.addEventListener('click', () => toggleMenu(false));
     });
 
+    // Close on ESC
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobileMenuBtn.getAttribute('aria-expanded') === 'true') {
         toggleMenu(false);
+      }
+    });
+
+    // Focus trap
+    mobileMenu.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+      const focusable = Array.from(mobileMenu.querySelectorAll('a:not([tabindex="-1"]), button:not([tabindex="-1"])'));
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     });
   }

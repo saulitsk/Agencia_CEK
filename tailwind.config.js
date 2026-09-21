@@ -91,6 +91,9 @@ export default {
         "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
         "headline-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "800" }],
         "headline-lg": ["40px", { lineHeight: "1.2", fontWeight: "800" }]
+      },
+      screens: {
+        'nav': '1100px',
       }
     },
   },

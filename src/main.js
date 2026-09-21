@@ -126,22 +126,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- 6. Mobile Menu ---
+    // --- 6. Mobile Menu (with full a11y: aria-hidden, tabindex, focus trap) ---
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuCloseBtn = document.getElementById('mobile-menu-close');
-    const mobileMenuLinks = mobileMenu?.querySelectorAll('a, button') || [];
+    const mobileMenuFocusableEls = mobileMenu?.querySelectorAll('a, button') || [];
     
     if (mobileMenuBtn && mobileMenu) {
         const toggleMenu = (open) => {
             const isExpanded = open !== undefined ? open : mobileMenuBtn.getAttribute('aria-expanded') === 'false';
             mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+            mobileMenu.setAttribute('aria-hidden', !isExpanded);
             
             if (isExpanded) {
                 mobileMenu.classList.remove('translate-x-full');
                 mobileMenu.classList.add('translate-x-0');
                 if (lenis) lenis.stop();
                 document.body.style.overflow = 'hidden';
+                // Make focusable
+                mobileMenuFocusableEls.forEach(el => el.removeAttribute('tabindex'));
                 // Focus trap - focus on close button
                 setTimeout(() => mobileMenuCloseBtn?.focus(), 300);
             } else {
@@ -149,6 +152,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 mobileMenu.classList.remove('translate-x-0');
                 if (lenis) lenis.start();
                 document.body.style.overflow = '';
+                // Remove from tab order when closed
+                mobileMenuFocusableEls.forEach(el => el.setAttribute('tabindex', '-1'));
                 mobileMenuBtn.focus();
             }
         };
@@ -157,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mobileMenuCloseBtn?.addEventListener('click', () => toggleMenu(false));
         
         // Close menu when clicking links
-        mobileMenuLinks.forEach(link => {
+        mobileMenuFocusableEls.forEach(link => {
             link.addEventListener('click', () => toggleMenu(false));
         });
 
@@ -165,6 +170,27 @@ document.addEventListener("DOMContentLoaded", () => {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && mobileMenuBtn.getAttribute('aria-expanded') === 'true') {
                 toggleMenu(false);
+            }
+        });
+
+        // Focus trap — keep Tab within the menu while open
+        mobileMenu.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+            const focusable = Array.from(mobileMenu.querySelectorAll('a:not([tabindex="-1"]), button:not([tabindex="-1"])'));
+            if (focusable.length === 0) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+
+            if (e.shiftKey) {
+                if (document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                }
+            } else {
+                if (document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
             }
         });
     }

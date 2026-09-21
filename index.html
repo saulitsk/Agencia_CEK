@@ -63,7 +63,7 @@
             </a>
 
             <!-- Nav pill capsule -->
-            <div class="hidden md:flex items-center gap-1 px-2 py-2 rounded-full nav-pill" id="nav-pill">
+            <div class="hidden nav:flex items-center gap-1 px-2 py-2 rounded-full nav-pill" id="nav-pill">
                 <a href="#viacoes"
                     class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200"
                     data-section="viacoes">
@@ -103,7 +103,7 @@
 
             <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20Ag%C3%AAncia%20C%26K%20e%20gostaria%20de%20comprar%20uma%20passagem."
                 target="_blank" rel="noopener noreferrer"
-                class="hidden md:flex items-center gap-2 bg-vibrant-gold text-deep-navy px-5 py-2.5 rounded-full font-headline-md font-bold text-[13px] tracking-tight hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#12205C] transition-all"
+                class="hidden nav:flex items-center gap-2 bg-vibrant-gold text-deep-navy px-5 py-2.5 rounded-full font-headline-md font-bold text-[13px] tracking-tight hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#12205C] transition-all"
                 aria-label="Compre pelo WhatsApp">
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;"
                     aria-hidden="true">chat</span>
@@ -113,7 +113,7 @@
             <!-- Mobile Menu Toggle -->
             <button id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu"
                 aria-label="Abrir menu mobile"
-                class="md:hidden text-pure-white p-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold">
+                class="nav:hidden text-pure-white p-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold">
                 <span class="material-symbols-outlined text-3xl" aria-hidden="true">menu</span>
             </button>
         </div>
@@ -121,7 +121,7 @@
 
     <!-- Mobile Menu Off-Canvas -->
     <div id="mobile-menu"
-        class="fixed inset-0 z-[60] bg-deep-navy text-pure-white transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col p-8"
+        class="fixed inset-0 z-[60] bg-deep-navy text-pure-white transform translate-x-full transition-transform duration-300 ease-in-out nav:hidden flex flex-col p-8"
         aria-hidden="true">
         <div class="flex justify-between items-center mb-12">
             <div class="font-headline-md text-headline-md font-bold text-vibrant-gold">Agência C&K</div>
@@ -131,21 +131,21 @@
             </button>
         </div>
         <nav class="flex flex-col space-y-8" aria-label="Navegação Mobile">
-            <a href="#viacoes"
+            <a href="#viacoes" tabindex="-1"
                 class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Nossas
                 Viações</a>
-            <a href="#destinos"
+            <a href="#destinos" tabindex="-1"
                 class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Destinos</a>
-            <a href="#promocoes"
+            <a href="#promocoes" tabindex="-1"
                 class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Promoções</a>
-            <a href="#sobre"
+            <a href="#sobre" tabindex="-1"
                 class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Sobre</a>
-            <a href="#contato"
+            <a href="#contato" tabindex="-1"
                 class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Contato</a>
         </nav>
         <div class="mt-auto pt-8 border-t border-outline-variant/30">
             <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20Ag%C3%AAncia%20C%26K%20e%20gostaria%20de%20comprar%20uma%20passagem."
-                target="_blank" rel="noopener noreferrer"
+                target="_blank" rel="noopener noreferrer" tabindex="-1"
                 class="flex items-center justify-center space-x-2 w-full bg-vibrant-gold text-deep-navy px-6 py-4 rounded-lg font-body-md text-label-caps font-bold">
                 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;"
                     aria-hidden="true">chat</span>
@@ -243,7 +243,8 @@
                             <h3 class="font-headline-md text-headline-md text-pure-white mb-4 leading-snug">Novo
                                 Horizonte</h3>
                             <p class="font-body-md text-body-md text-surface-variant flex-1 mb-6">
-                                Mais de <strong class="text-pure-white">200 cidades</strong> na Bahia. Também atende
+                                Presente em mais de <strong class="text-pure-white">200 cidades</strong> na Bahia.
+                                Também atende
                                 destinos em
                                 outros estados.
                             </p>
@@ -393,7 +394,7 @@
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 reveal-up">
                 <h2 id="destinos-title"
                     class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-deep-navy max-w-2xl">
-                    Destinos Atendidos pelas <span class="italic text-vibrant-gold">Parceiras</span>
+                    Destinos em <span class="italic text-vibrant-gold">Destaque</span>
                 </h2>
                 <a href="destinos.html"
                     class="font-body-md font-medium text-label-caps text-deep-navy border-b border-deep-navy pb-1 hover:text-vibrant-gold hover:border-vibrant-gold transition-colors inline-flex items-center group">
@@ -406,7 +407,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
 
                 <!-- Card: Irecê -->
-                <a href="destinos.html?destino=Irecê" class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
+                <a href="destinos.html?destino=Irecê"
+                    class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
                     style="transition-delay: 0.1s">
                     <picture class="absolute inset-0 w-full h-full block">
                         <img src="./assets/images/destino-irece.jpg" alt="Irecê, Bahia" loading="lazy"
@@ -429,7 +431,8 @@
                 </a>
 
                 <!-- Card: Brumado -->
-                <a href="destinos.html?destino=Brumado" class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
+                <a href="destinos.html?destino=Brumado"
+                    class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
                     style="transition-delay: 0.2s">
                     <picture class="absolute inset-0 w-full h-full block bg-surface-variant">
                         <img src="./assets/images/destino-brumado.jpg" alt="Brumado, Bahia" loading="lazy"
@@ -453,10 +456,12 @@
                 </a>
 
                 <!-- Card: Vitória da Conquista -->
-                <a href="destinos.html?destino=Vitória da Conquista" class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
+                <a href="destinos.html?destino=Vitória da Conquista"
+                    class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
                     style="transition-delay: 0.3s">
                     <picture class="absolute inset-0 w-full h-full block bg-surface-variant">
-                        <img src="./assets/images/destino-vitoria-da-conquista.jpg" alt="Vitória da Conquista, Bahia" loading="lazy"
+                        <img src="./assets/images/destino-vitoria-da-conquista.jpg" alt="Vitória da Conquista, Bahia"
+                            loading="lazy"
                             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                             onerror="this.style.display='none'">
                     </picture>
@@ -477,10 +482,12 @@
                 </a>
 
                 <!-- Card: Bom Jesus da Lapa -->
-                <a href="destinos.html?destino=Bom Jesus da Lapa" class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
+                <a href="destinos.html?destino=Bom Jesus da Lapa"
+                    class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
                     style="transition-delay: 0.4s">
                     <picture class="absolute inset-0 w-full h-full block bg-surface-variant">
-                        <img src="./assets/images/destino-bom-jesus-da-lapa.jpg" alt="Bom Jesus da Lapa, Bahia" loading="lazy"
+                        <img src="./assets/images/destino-bom-jesus-da-lapa.jpg" alt="Bom Jesus da Lapa, Bahia"
+                            loading="lazy"
                             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                             onerror="this.style.display='none'">
                     </picture>
@@ -501,11 +508,11 @@
                 </a>
 
                 <!-- Card: Souto Soares -->
-                <a href="destinos.html?destino=Souto Soares" class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
+                <a href="destinos.html?destino=Souto Soares"
+                    class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
                     style="transition-delay: 0.5s">
                     <picture class="absolute inset-0 w-full h-full block">
-                        <img src="./assets/images/destino-souto-soares.jfif" alt="Souto Soares, Bahia"
-                            loading="lazy"
+                        <img src="./assets/images/destino-souto-soares.jfif" alt="Souto Soares, Bahia" loading="lazy"
                             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                     </picture>
                     <div
@@ -525,7 +532,8 @@
                 </a>
 
                 <!-- Card: Ilhéus -->
-                <a href="destinos.html?destino=Ilhéus" class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
+                <a href="destinos.html?destino=Ilhéus"
+                    class="group relative h-[400px] overflow-hidden rounded-lg cursor-pointer reveal-up block"
                     style="transition-delay: 0.6s">
                     <picture class="absolute inset-0 w-full h-full block bg-surface-variant">
                         <img src="./assets/images/destino-ilheus.jpg" alt="Ilhéus, Bahia" loading="lazy"
@@ -552,7 +560,7 @@
 
             <div class="mt-12 text-center md:text-left reveal-up">
                 <p class="font-body-md text-body-md text-outline">
-                    Atendemos mais de 80 destinos em <strong class="text-deep-navy">4 estados</strong>: Bahia, Minas
+                    Atendemos mais de 200 destinos em <strong class="text-deep-navy">4 estados</strong>: Bahia, Minas
                     Gerais, Goiás e Distrito Federal.
                     <a href="destinos.html"
                         class="text-deep-navy font-medium border-b border-deep-navy/30 hover:text-vibrant-gold hover:border-vibrant-gold transition-colors ml-1">Ver
@@ -579,18 +587,18 @@
                 </h2>
             </div>
 
-            <!-- Grid de bilhetes — 1 col mobile, 3 col desktop -->
+            <!-- Grid de bilhetes — 1 col mobile, 2 col tablet, 4 col desktop -->
             <div
-                class="relative z-10 w-full max-w-[1440px] px-margin-mobile md:px-margin-desktop grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                class="relative z-10 w-full max-w-[1440px] px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-stretch">
 
                 <!-- Bilhete 1: Novo Horizonte -->
-                <div class="relative bg-cream-canvas serrated-edges shadow-xl mx-auto w-full py-10 px-6 md:px-10 flex flex-col border-y border-outline/20 reveal-up ticket-shape"
+                <div class="relative bg-cream-canvas serrated-edges shadow-xl mx-auto w-full py-10 px-6 xl:px-8 flex flex-col border-y border-outline/20 reveal-up ticket-shape"
                     style="transition-delay: 0.1s">
                     <div
                         class="font-label-caps text-label-caps text-on-secondary-container mb-1 uppercase tracking-widest text-center">
-                        Viação Novo Horizonte</div>
-                    <h3 class="font-headline-md text-headline-md text-deep-navy mb-2 text-center">São Paulo <span
-                            class="text-vibrant-gold mx-1" aria-hidden="true">×</span> Bahia</h3>
+                        São Paulo <span class="text-vibrant-gold mx-1" aria-hidden="true">×</span> Bahia</div>
+                    <h3 class="font-headline-md text-[26px] md:text-headline-md text-deep-navy mb-2 text-center">
+                        Novo Horizonte</h3>
                     <p class="font-body-md text-body-md text-on-tertiary-container text-center mb-6">+200 destinos com
                         conforto e segurança em toda a viagem.</p>
                     <div
@@ -606,7 +614,7 @@
                         </div>
                         <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20vi%20a%20promo%C3%A7%C3%A3o%20da%20Novo%20Horizonte%20em%20at%C3%A9%206x%20sem%20juros%20e%20quero%20garantir%20minha%20passagem%21"
                             target="_blank" rel="noopener noreferrer"
-                            class="bg-deep-navy text-vibrant-gold px-8 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
+                            class="bg-deep-navy text-vibrant-gold px-4 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
                             Garantir Oferta
                         </a>
                     </div>
@@ -620,13 +628,13 @@
                 </div>
 
                 <!-- Bilhete 2: EMTRAM -->
-                <div class="relative bg-cream-canvas serrated-edges shadow-xl mx-auto w-full py-10 px-6 md:px-10 flex flex-col border-y border-outline/20 reveal-up ticket-shape"
+                <div class="relative bg-cream-canvas serrated-edges shadow-xl mx-auto w-full py-10 px-6 xl:px-8 flex flex-col border-y border-outline/20 reveal-up ticket-shape"
                     style="transition-delay: 0.2s">
                     <div
                         class="font-label-caps text-label-caps text-on-secondary-container mb-1 uppercase tracking-widest text-center">
-                        EMTRAM</div>
-                    <h3 class="font-headline-md text-headline-md text-deep-navy mb-2 text-center">São Paulo <span
-                            class="text-vibrant-gold mx-1" aria-hidden="true">×</span> Bahia</h3>
+                        São Paulo <span class="text-vibrant-gold mx-1" aria-hidden="true">×</span> Bahia</div>
+                    <h3 class="font-headline-md text-[26px] md:text-headline-md text-deep-navy mb-2 text-center">
+                        EMTRAM</h3>
                     <p class="font-body-md text-body-md text-on-tertiary-container text-center mb-6">Ampla rede de
                         destinos com atendimento de qualidade de ponta a ponta.</p>
                     <div
@@ -641,7 +649,7 @@
                         </div>
                         <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20passagens%20pela%20EMTRAM%21"
                             target="_blank" rel="noopener noreferrer"
-                            class="bg-deep-navy text-vibrant-gold px-8 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
+                            class="bg-deep-navy text-vibrant-gold px-4 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
                             Consultar Horários
                         </a>
                     </div>
@@ -654,13 +662,13 @@
                 </div>
 
                 <!-- Bilhete 3: Anjos Turismo -->
-                <div class="relative bg-cream-canvas serrated-edges shadow-xl mx-auto w-full py-10 px-6 md:px-10 flex flex-col border-y border-outline/20 reveal-up ticket-shape"
+                <div class="relative bg-cream-canvas serrated-edges shadow-xl mx-auto w-full py-10 px-6 xl:px-8 flex flex-col border-y border-outline/20 reveal-up ticket-shape"
                     style="transition-delay: 0.3s">
                     <div
                         class="font-label-caps text-label-caps text-on-secondary-container mb-1 uppercase tracking-widest text-center">
-                        Anjos Turismo</div>
-                    <h3 class="font-headline-md text-headline-md text-deep-navy mb-2 text-center">São Paulo <span
-                            class="text-vibrant-gold mx-1" aria-hidden="true">×</span> Irecê</h3>
+                        São Paulo <span class="text-vibrant-gold mx-1" aria-hidden="true">×</span> Irecê</div>
+                    <h3 class="font-headline-md text-[26px] md:text-headline-md text-deep-navy mb-2 text-center">
+                        Anjos Turismo</h3>
                     <p class="font-body-md text-body-md text-on-tertiary-container text-center mb-6">A opção mais rápida
                         para Irecê, com saídas diretas 2 vezes por semana.</p>
                     <div
@@ -675,8 +683,44 @@
                         </div>
                         <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20passagem%20pela%20Anjos%20Turismo%20de%20SP%20para%20Irec%C3%AA%21"
                             target="_blank" rel="noopener noreferrer"
-                            class="bg-deep-navy text-vibrant-gold px-8 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
-                            Garantir Minha Vaga
+                            class="bg-deep-navy text-vibrant-gold px-4 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
+                            Garantir Vaga
+                        </a>
+                    </div>
+                    <div
+                        class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-deep-navy hidden md:block">
+                    </div>
+                    <div
+                        class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-8 h-8 rounded-full bg-deep-navy hidden md:block">
+                    </div>
+                </div>
+
+                <!-- Bilhete 4: Gil Turismo -->
+                <div class="relative bg-cream-canvas serrated-edges shadow-xl mx-auto w-full py-10 px-6 xl:px-8 flex flex-col border-y border-outline/20 reveal-up ticket-shape"
+                    style="transition-delay: 0.4s">
+                    <div
+                        class="font-label-caps text-label-caps text-on-secondary-container mb-1 uppercase tracking-widest text-center">
+                        São Paulo <span class="text-vibrant-gold mx-1" aria-hidden="true">×</span> Irecê</div>
+                    <h3 class="font-headline-md text-[26px] md:text-headline-md text-deep-navy mb-2 text-center">
+                        Gil Turismo</h3>
+                    <p class="font-body-md text-body-md text-on-tertiary-container text-center mb-6">A opção mais
+                        econômica entre as nossas parceiras.</p>
+                    <div
+                        class="border-t border-dashed border-deep-navy/30 pt-6 flex flex-col items-center flex-1 justify-between">
+                        <div class="text-center mb-6">
+                            <span
+                                class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">Saída</span>
+                            <span
+                                class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">todo</span>
+                            <span
+                                class="block font-display-xl text-[45px] md:text-[40px] lg:text-[50px] xl:text-[45px] font-extrabold text-vibrant-gold leading-none drop-shadow-sm my-1">DOMINGO</span>
+                            <span class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">de
+                                manhã</span>
+                        </div>
+                        <a href="https://wa.me/5511954047211?text=Ol%C3%A1%21%20Gostaria%20de%20consultar%20uma%20passagem%20pela%20Gil%20Turismo%2C%20de%20S%C3%A3o%20Paulo%20para%20Irec%C3%AA."
+                            target="_blank" rel="noopener noreferrer"
+                            class="bg-deep-navy text-vibrant-gold px-4 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
+                            Consultar Valor
                         </a>
                     </div>
                     <div
@@ -691,83 +735,163 @@
         </section>
 
         <!-- ============================================================ -->
-        <!-- SEÇÃO: SOBRE / NOSSA HISTÓRIA                                 -->
+        <!-- SEÇÃO: SOBRE NÓS                                              -->
         <!-- ============================================================ -->
-        <section
-            class="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface max-w-[1440px] mx-auto flex flex-col md:flex-row items-center gap-16"
+        <section class="py-16 md:py-section-gap px-margin-mobile md:px-margin-desktop bg-surface max-w-[1440px] mx-auto"
             id="sobre" aria-labelledby="sobre-title">
-            <div class="flex-1 w-full order-2 md:order-1 reveal-up overflow-hidden rounded-lg">
-                <div
-                    class="relative h-[500px] w-full rounded-lg overflow-hidden border border-outline-variant/30 parallax-container">
-                    <picture class="absolute inset-0 w-full h-full block">
-                        <img src="./assets/images/nossa-historia.jpg" alt="Nossa história — Agência C&K" loading="lazy"
-                            class="w-full h-full object-cover">
-                    </picture>
-                </div>
-            </div>
+            <div class="flex flex-col md:flex-row items-start gap-10 md:gap-16">
+                <!-- Coluna de texto — 55% desktop -->
+                <div class="w-full md:w-[55%] order-1 reveal-up">
+                    <h2 id="sobre-title"
+                        class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-deep-navy mb-6">
+                        Sobre <span class="italic text-vibrant-gold">Nós</span>
+                    </h2>
+                    <div class="space-y-4 text-on-surface-variant">
+                        <p class="font-body-lg text-body-lg">
+                            Conhecida pelos passageiros como a <strong class="text-deep-navy">"Agência do
+                                Carlos"</strong>,
+                            a Agência C&K está há mais de 15 anos conectando histórias, famílias e viajantes aos seus
+                            destinos do coração.
+                        </p>
+                        <p class="font-body-lg text-body-lg">
+                            Nossa trajetória foi construída com base na confiança e na fidelidade dos nossos clientes.
+                            Por
+                            isso, nosso compromisso é garantir sempre um serviço de qualidade, com as melhores opções e
+                            os
+                            preços mais justos para a sua viagem.
+                        </p>
+                        <p class="font-body-lg text-body-lg">
+                            Temos atendimento presencial. Estamos localizados em São Paulo, pertinho das estações de
+                            metrô
+                            <strong class="text-deep-navy">Praça da Árvore</strong> e <strong
+                                class="text-deep-navy">Saúde</strong>, prontos para receber você e ajudar a planejar
+                            sua
+                            próxima viagem.
+                        </p>
+                    </div>
 
-            <div class="flex-1 order-1 md:order-2 reveal-up" style="transition-delay: 0.2s">
-                <h2 id="sobre-title"
-                    class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-deep-navy mb-8">
-                    Nossa <span class="italic text-vibrant-gold">História</span>
-                </h2>
-                <div class="space-y-6 text-on-surface-variant">
-                    <p class="font-body-lg text-body-lg">
-                        A <strong class="text-deep-navy">Agência C&K</strong> nasceu com um propósito claro: ser a ponte
-                        de confiança entre São Paulo e o interior da Bahia. Somos parceiros oficiais de múltiplas
-                        viações renomadas, reunindo as melhores opções de rota, horário e preço em um só lugar.
-                    </p>
-                    <p class="font-body-lg text-body-lg">
-                        Diferente das plataformas digitais, nossa agência na <strong class="text-deep-navy">Praça da
-                            Árvore</strong> oferece atendimento presencial e humanizado. Aqui você fala com quem entende
-                        do assunto e vai ajudar a encontrar a melhor viagem para você — seja para um reencontro, negócio
-                        ou nova aventura.
-                    </p>
-
-                    <div class="pt-6 border-t border-outline-variant">
+                    <!-- Diferenciais — grade 2×2 -->
+                    <div class="pt-6 mt-6 border-t border-outline-variant">
                         <p class="font-label-caps text-label-caps text-deep-navy mb-4">Diferenciais</p>
-                        <ul class="space-y-3 font-body-md text-body-md">
-                            <li class="flex items-center"><span class="material-symbols-outlined text-vibrant-gold mr-3"
-                                    aria-hidden="true">verified</span> Atendimento Humanizado e Presencial</li>
-                            <li class="flex items-center"><span class="material-symbols-outlined text-vibrant-gold mr-3"
-                                    aria-hidden="true">directions_bus</span> Frota Moderna e Segura</li>
-                            <li class="flex items-center"><span class="material-symbols-outlined text-vibrant-gold mr-3"
-                                    aria-hidden="true">payments</span> Facilidade no Pagamento</li>
-                            <li class="flex items-center"><span class="material-symbols-outlined text-vibrant-gold mr-3"
-                                    aria-hidden="true">handshake</span> Curadoria de Parceiras de Confiança</li>
-                        </ul>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div
+                                class="flex items-center gap-3 bg-surface-container-low rounded-lg px-4 py-3 border border-outline-variant/30">
+                                <span class="material-symbols-outlined text-vibrant-gold text-[22px]"
+                                    aria-hidden="true">support_agent</span>
+                                <span class="font-body-md text-body-md text-deep-navy font-medium">Atendimento
+                                    Presencial</span>
+                            </div>
+                            <div
+                                class="flex items-center gap-3 bg-surface-container-low rounded-lg px-4 py-3 border border-outline-variant/30">
+                                <span class="material-symbols-outlined text-vibrant-gold text-[22px]"
+                                    aria-hidden="true">location_on</span>
+                                <span class="font-body-md text-body-md text-deep-navy font-medium">Diversas opções de
+                                    cidades</span>
+                            </div>
+                            <div
+                                class="flex items-center gap-3 bg-surface-container-low rounded-lg px-4 py-3 border border-outline-variant/30">
+                                <span class="material-symbols-outlined text-vibrant-gold text-[22px]"
+                                    aria-hidden="true">payments</span>
+                                <span class="font-body-md text-body-md text-deep-navy font-medium">Facilidade no
+                                    Pagamento</span>
+                            </div>
+                            <div
+                                class="flex items-center gap-3 bg-surface-container-low rounded-lg px-4 py-3 border border-outline-variant/30">
+                                <span class="material-symbols-outlined text-vibrant-gold text-[22px]"
+                                    aria-hidden="true">handshake</span>
+                                <span class="font-body-md text-body-md text-deep-navy font-medium">Parceiras de
+                                    Confiança</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna da imagem — 45% desktop -->
+                <div class="w-full md:w-[45%] order-2 reveal-up" style="transition-delay: 0.2s">
+                    <div
+                        class="relative h-[280px] sm:h-[320px] md:h-[420px] w-full rounded-lg overflow-hidden border border-outline-variant/30">
+                        <img src="./assets/images/nossa-historia.jpg" alt="Sobre nós — Agência C&K" loading="lazy"
+                            class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ============================================================ -->
-        <!-- FAIXA DE CONTATO                                              -->
+        <!-- SEÇÃO: ONDE ESTAMOS / CONTATO                                 -->
         <!-- ============================================================ -->
-        <section class="w-full bg-vibrant-gold text-deep-navy py-12 px-margin-mobile md:px-margin-desktop reveal-up"
-            id="contato" aria-label="Contato e Localização">
-            <div
-                class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
-                <div class="flex items-center space-x-6">
-                    <div class="bg-pure-white p-4 rounded-full shadow-md" aria-hidden="true">
-                        <span class="material-symbols-outlined text-4xl text-green-600"
-                            style="font-variation-settings: 'FILL' 1;">chat</span>
+        <section class="pb-16 md:pb-section-gap px-margin-mobile md:px-margin-desktop bg-surface max-w-[1440px] mx-auto"
+            id="contato" aria-labelledby="contato-title">
+            <div class="reveal-up">
+                <!-- Card amplo com mapa + informações -->
+                <div
+                    class="rounded-xl overflow-hidden border border-outline-variant/30 shadow-lg flex flex-col md:flex-row">
+                    <!-- Área do mapa — 60% desktop -->
+                    <div class="w-full md:w-[60%] h-[280px] sm:h-[320px] md:h-[400px] relative bg-surface-container">
+                        <iframe
+                            src="https://maps.google.com/maps?q=Rua+Carneiro+da+Cunha,+218,+S%C3%A3o+Paulo+-+SP,+04144-000&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Mapa da Agência C&K — Rua Carneiro da Cunha, 218, São Paulo"></iframe>
+                        <!-- Fallback em caso de bloqueio do iframe -->
+                        <noscript>
+                            <div class="flex items-center justify-center h-full bg-surface-container-high p-6">
+                                <a href="https://www.google.com/maps/search/Rua+Carneiro+da+Cunha,+218,+São+Paulo+-+SP"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="text-deep-navy font-body-md underline">Abrir no Google Maps</a>
+                            </div>
+                        </noscript>
                     </div>
-                    <div>
-                        <p class="font-label-caps text-label-caps mb-1 opacity-80">Fale com a gente agora</p>
-                        <p class="font-headline-md text-headline-md font-bold md:text-[36px]">(11) 95404-7211</p>
-                    </div>
-                </div>
 
-                <div class="flex flex-col items-center md:items-end">
-                    <p class="font-label-caps text-label-caps mb-2 opacity-80 flex items-center">
-                        <span class="material-symbols-outlined text-[18px] mr-1" aria-hidden="true">location_on</span>
-                        Visite nossa agência
-                    </p>
-                    <address class="not-italic">
-                        <p class="font-body-lg text-body-lg font-bold">Rua Carneiro da Cunha, 218</p>
-                        <p class="font-body-md text-body-md">Praça da Árvore, São Paulo - SP</p>
-                    </address>
+                    <!-- Área de informações — 40% desktop, fundo navy -->
+                    <div
+                        class="w-full md:w-[40%] bg-deep-navy text-pure-white p-8 md:p-10 flex flex-col justify-center">
+                        <div class="font-label-caps text-label-caps text-vibrant-gold mb-3 uppercase tracking-widest">
+                            Atendimento Presencial</div>
+                        <h3 id="contato-title"
+                            class="font-headline-md text-[22px] md:text-headline-md text-pure-white mb-6">
+                            Visite nossa agência</h3>
+
+                        <address class="not-italic space-y-3 mb-8">
+                            <div class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-vibrant-gold text-[20px] mt-0.5"
+                                    aria-hidden="true">location_on</span>
+                                <div>
+                                    <p class="font-body-md text-body-md text-pure-white font-medium">Rua Carneiro da
+                                        Cunha, 218</p>
+                                    <p class="font-body-md text-body-md text-surface-variant">Praça da Árvore, São
+                                        Paulo — SP</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-vibrant-gold text-[20px] mt-0.5"
+                                    aria-hidden="true">train</span>
+                                <p class="font-body-md text-body-md text-surface-variant">Próxima às estações Praça da
+                                    Árvore e Saúde</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-vibrant-gold text-[20px] mt-0.5"
+                                    aria-hidden="true">call</span>
+                                <p class="font-body-md text-body-md text-pure-white font-medium">(11) 95404-7211</p>
+                            </div>
+                        </address>
+
+                        <div class="flex flex-col gap-3">
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=Rua+Carneiro+da+Cunha,+218,+S%C3%A3o+Paulo+-+SP,+04144-000"
+                                target="_blank" rel="noopener noreferrer"
+                                class="flex items-center justify-center gap-2 bg-vibrant-gold text-deep-navy px-5 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all text-center">
+                                <span class="material-symbols-outlined text-[20px]" aria-hidden="true">directions</span>
+                                Como chegar
+                            </a>
+                            <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20Ag%C3%AAncia%20C%26K%20e%20gostaria%20de%20comprar%20uma%20passagem."
+                                target="_blank" rel="noopener noreferrer"
+                                class="flex items-center justify-center gap-2 bg-transparent text-pure-white border border-pure-white/40 px-5 py-3 rounded-lg font-body-md text-label-caps font-bold hover:bg-pure-white/10 hover:border-vibrant-gold transition-all text-center">
+                                <span class="material-symbols-outlined text-[20px]"
+                                    style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
+                                Falar no WhatsApp
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -776,12 +900,12 @@
     <!-- Footer -->
     <footer class="bg-deep-navy w-full border-t border-outline-variant/20">
         <div
-            class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-section-gap w-full max-w-[1440px] mx-auto reveal-up">
-            <div class="font-headline-md text-headline-md text-vibrant-gold mb-8 md:mb-0">
+            class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-8 md:py-10 w-full max-w-[1440px] mx-auto">
+            <div class="font-headline-md text-headline-md text-vibrant-gold mb-4 md:mb-0">
                 Agência C&K
             </div>
 
-            <nav class="flex flex-wrap justify-center gap-6 mb-8 md:mb-0" aria-label="Rodapé">
+            <nav class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0" aria-label="Rodapé">
                 <a href="termos.html"
                     class="text-surface-variant hover:text-vibrant-gold transition-colors font-body-md font-medium text-label-caps opacity-80 hover:opacity-100">Termos
                     de Uso</a>
@@ -791,7 +915,7 @@
             </nav>
 
             <div class="text-surface-variant font-body-md text-body-md text-center md:text-right">
-                © 2026 Agência C&K. Passagens para a Bahia com confiança.
+                © 2026 Agência C&K. Passagens com confiança.
             </div>
         </div>
     </footer>
