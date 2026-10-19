@@ -193,6 +193,12 @@ export function buscarDestinos(termo) {
   return DESTINOS.filter(d => {
     const nomeNorm = normalizar(d.nome);
     if (nomeNorm.includes(termoNorm)) return true;
+    if (d.uf.toLowerCase() === termoNorm) return true;
+    const estadoNome = NOMES_UF[d.uf] ? normalizar(NOMES_UF[d.uf]) : '';
+    if (estadoNome.includes(termoNorm)) return true;
+    if (normalizar(`${d.nome} - ${d.uf}`).includes(termoNorm)) return true;
+    if (normalizar(`${d.nome} — ${d.uf}`).includes(termoNorm)) return true;
+    if (normalizar(`${d.nome} ${d.uf}`).includes(termoNorm)) return true;
     // Também busca pelo detalhe (ex: "rio do pires" encontra Ibiajara)
     if (d.detalhe && normalizar(d.detalhe).includes(termoNorm)) return true;
     return false;

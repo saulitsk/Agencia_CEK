@@ -3,12 +3,14 @@ import Lenis from 'lenis'
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // --- 1. Acessibilidade e Reduce Motion ---
+    // --- 1. Acessibilidade e Detecção de Touch/Mobile ---
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || ('ontouchstart' in window);
 
     // --- 2. Smooth Scrolling (Lenis) ---
+    // Ativado apenas em desktop/mouse para não interferir na rolagem cinética nativa a 120Hz dos celulares
     let lenis;
-    if (!prefersReducedMotion) {
+    if (!prefersReducedMotion && !isTouchDevice) {
         lenis = new Lenis({
             autoRaf: true,
             lerp: 0.1, // Smoothness
@@ -41,9 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- 3. Reactive Header ---
+    // --- 3. Reactive Header (Throttled com requestAnimationFrame) ---
     const nav = document.getElementById('main-nav');
     let lastScrollY = window.scrollY;
+    let headerTicking = false;
     
     const handleScroll = (currentScrollY) => {
         // Background logic
@@ -64,11 +67,20 @@ document.addEventListener("DOMContentLoaded", () => {
         lastScrollY = currentScrollY;
     };
 
-    window.addEventListener('scroll', () => handleScroll(window.scrollY), { passive: true });
+    window.addEventListener('scroll', () => {
+        if (!headerTicking) {
+            requestAnimationFrame(() => {
+                handleScroll(window.scrollY);
+                headerTicking = false;
+            });
+            headerTicking = true;
+        }
+    }, { passive: true });
 
-    // --- 4. Parallax Effects ---
+    // --- 4. Parallax Effects (Apenas em Desktop para evitar forced reflow no celular) ---
     const parallaxElements = document.querySelectorAll('.parallax-bg');
-    if (!prefersReducedMotion && parallaxElements.length > 0) {
+    if (!prefersReducedMotion && !isTouchDevice && parallaxElements.length > 0) {
+        let parallaxTicking = false;
         const handleParallax = () => {
             const windowHeight = window.innerHeight;
             parallaxElements.forEach(el => {
@@ -83,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     const diff = elementCenter - viewportCenter;
                     
                     // Limit the parallax movement to prevent the image from escaping the container
-                    // Scale 1.15 gives us about 7.5% margin on top and bottom
                     const yPos = diff * speed * 0.15; 
                     el.style.transform = `translate3d(0, ${yPos}px, 0) scale(1.15)`;
                 }
@@ -93,17 +104,27 @@ document.addEventListener("DOMContentLoaded", () => {
         if (lenis) {
             lenis.on('scroll', handleParallax);
         } else {
-            window.addEventListener('scroll', handleParallax, { passive: true });
+            window.addEventListener('scroll', () => {
+                if (!parallaxTicking) {
+                    requestAnimationFrame(() => {
+                        handleParallax();
+                        parallaxTicking = false;
+                    });
+                    parallaxTicking = true;
+                }
+            }, { passive: true });
         }
     }
 
-    // --- 5. Entrance Reveals ---
+    // --- 5. Entrance Reveals (Fluido e progressivo no celular) ---
     const revealElements = document.querySelectorAll('.reveal-up');
     if (revealElements.length > 0) {
         if (prefersReducedMotion) {
             // If reduced motion, show immediately
             revealElements.forEach(el => el.classList.add('is-visible'));
         } else {
+            // Margem positiva para que os elementos comecem a deslizar suavemente antes de bater no rodapé da tela
+            const rootMargin = isTouchDevice ? "0px 0px 40px 0px" : "0px 0px 20px 0px";
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -113,8 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }, {
                 root: null,
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px"
+                threshold: 0.05,
+                rootMargin: rootMargin
             });
             
             revealElements.forEach(el => revealObserver.observe(el));

@@ -96,16 +96,67 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Autocomplete ---
-  function renderSugestoes(filtro) {
-    const termo = filtro.trim();
+  function renderSugestoes(filtro = '') {
+    const termo = (filtro || '').trim();
     const termoNorm = normalizar(termo);
     listaSugestoes.innerHTML = '';
     selectedIndex = -1;
     inputDestino.removeAttribute('aria-activedescendant');
 
     if (termoNorm.length === 0) {
-      listaSugestoes.classList.add('hidden');
-      inputDestino.setAttribute('aria-expanded', 'false');
+      // Cabeçalho fixo com contagem total
+      const liHeader = document.createElement('li');
+      liHeader.className = 'px-4 py-2 bg-[#F6F5F0] text-deep-navy font-label-caps text-[11px] font-bold tracking-wider uppercase flex items-center justify-between border-b border-outline-variant/30 sticky top-0 z-10 select-none';
+      liHeader.innerHTML = `<span>Selecione uma cidade</span><span class="text-outline font-normal normal-case tracking-normal">${DESTINOS.length} destinos</span>`;
+      listaSugestoes.appendChild(liHeader);
+
+      const grupos = agruparPorUF();
+      const ordemUF = ['BA', 'MG', 'GO', 'DF'];
+      let globalIdx = 0;
+
+      ordemUF.forEach(uf => {
+        const cidades = grupos[uf] || [];
+        if (cidades.length === 0) return;
+
+        // Cabeçalho do Estado
+        const liEstado = document.createElement('li');
+        liEstado.className = 'px-4 py-1.5 bg-[#EEECE5] text-deep-navy font-headline-md font-bold text-[12px] tracking-wide flex items-center justify-between border-b border-t border-outline-variant/30 sticky top-[33px] z-[5] select-none';
+        const nomeEstado = NOMES_UF[uf] || uf;
+        liEstado.innerHTML = `<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-vibrant-gold shrink-0"></span>${escapeHtml(nomeEstado)} (${uf})</span><span class="text-[11px] text-outline font-normal">${cidades.length} ${cidades.length === 1 ? 'cidade' : 'cidades'}</span>`;
+        listaSugestoes.appendChild(liEstado);
+
+        cidades.forEach((destino) => {
+          const li = document.createElement('li');
+          li.className = 'suggestion-item';
+          li.setAttribute('role', 'option');
+          li.setAttribute('id', `suggestion-${globalIdx++}`);
+          const isCurrent = destinoSelecionado && destinoSelecionado.nome === destino.nome && destinoSelecionado.uf === destino.uf;
+          li.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+          if (isCurrent) {
+            li.classList.add('is-selected');
+          }
+          li.setAttribute('data-nome', destino.nome);
+          li.setAttribute('data-uf', destino.uf);
+
+          const detalheHtml = destino.detalhe
+            ? `<span class="text-[11px] text-outline opacity-50 ml-1">(${escapeHtml(destino.detalhe)})</span>`
+            : '';
+
+          li.innerHTML = `<span class="material-symbols-outlined text-[16px] mr-2 text-vibrant-gold shrink-0" aria-hidden="true">location_on</span><span class="truncate">${escapeHtml(destino.nome)}</span>${detalheHtml}<span class="ml-auto text-[11px] text-outline opacity-60 pl-2 shrink-0">${destino.uf}</span>`;
+
+          const onSelect = (e) => {
+            if (e.type === 'mousedown') e.preventDefault();
+            selecionarCidade(destino);
+          };
+          li.addEventListener('mousedown', onSelect);
+          li.addEventListener('click', onSelect);
+
+          listaSugestoes.appendChild(li);
+        });
+      });
+
+      listaSugestoes.classList.remove('hidden');
+      inputDestino.setAttribute('aria-expanded', 'true');
       return;
     }
 
@@ -130,10 +181,12 @@ document.addEventListener('DOMContentLoaded', () => {
       liFallback.setAttribute('data-fallback', 'true');
       liFallback.innerHTML = `<span class="material-symbols-outlined text-[16px] mr-2 text-vibrant-gold" aria-hidden="true">chat</span>Consultar "<strong>${escapeHtml(termo)}</strong>"`;
 
-      liFallback.addEventListener('mousedown', (e) => {
-        e.preventDefault();
+      const onFallback = (e) => {
+        if (e.type === 'mousedown') e.preventDefault();
         consultarDestinoLivre(termo);
-      });
+      };
+      liFallback.addEventListener('mousedown', onFallback);
+      liFallback.addEventListener('click', onFallback);
 
       listaSugestoes.appendChild(liFallback);
       listaSugestoes.classList.remove('hidden');
@@ -141,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Renderizar resultados
+    // Renderizar resultados filtrados
     resultados.forEach((destino, i) => {
       const li = document.createElement('li');
       li.className = 'suggestion-item';
@@ -168,12 +221,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ? `<span class="text-[11px] text-outline opacity-50 ml-1">(${escapeHtml(destino.detalhe)})</span>`
         : '';
 
-      li.innerHTML = `<span class="material-symbols-outlined text-[16px] mr-2 text-vibrant-gold" aria-hidden="true">location_on</span>${nomeHtml}${detalheHtml}<span class="ml-auto text-[11px] text-outline opacity-60 pl-2 shrink-0">${destino.uf}</span>`;
+      li.innerHTML = `<span class="material-symbols-outlined text-[16px] mr-2 text-vibrant-gold shrink-0" aria-hidden="true">location_on</span><span class="truncate">${nomeHtml}</span>${detalheHtml}<span class="ml-auto text-[11px] text-outline opacity-60 pl-2 shrink-0">${destino.uf}</span>`;
 
-      li.addEventListener('mousedown', (e) => {
-        e.preventDefault();
+      const onSelect = (e) => {
+        if (e.type === 'mousedown') e.preventDefault();
         selecionarCidade(destino);
-      });
+      };
+      li.addEventListener('mousedown', onSelect);
+      li.addEventListener('click', onSelect);
 
       listaSugestoes.appendChild(li);
     });
@@ -187,10 +242,12 @@ document.addEventListener('DOMContentLoaded', () => {
     liConsultar.setAttribute('data-fallback', 'true');
     liConsultar.innerHTML = `<span class="material-symbols-outlined text-[16px] mr-2 text-outline/50" aria-hidden="true">help_outline</span><span class="text-on-surface/60">Consultar "<strong>${escapeHtml(termo)}</strong>" mesmo assim</span>`;
 
-    liConsultar.addEventListener('mousedown', (e) => {
-      e.preventDefault();
+    const onConsultar = (e) => {
+      if (e.type === 'mousedown') e.preventDefault();
       consultarDestinoLivre(termo);
-    });
+    };
+    liConsultar.addEventListener('mousedown', onConsultar);
+    liConsultar.addEventListener('click', onConsultar);
 
     listaSugestoes.appendChild(liConsultar);
 
@@ -258,6 +315,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 
+  const abrirSugestoes = () => {
+    if (destinoSelecionado && inputDestino.value.includes(destinoSelecionado.nome)) {
+      renderSugestoes('');
+      const selectedEl = listaSugestoes.querySelector('.is-selected');
+      if (selectedEl) {
+        selectedEl.scrollIntoView({ block: 'nearest' });
+      }
+    } else {
+      renderSugestoes(inputDestino.value);
+    }
+  };
+
   inputDestino.addEventListener('input', () => {
     destinoSelecionado = null;
     renderSugestoes(inputDestino.value);
@@ -265,17 +334,27 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   inputDestino.addEventListener('focus', () => {
-    if (inputDestino.value.trim().length > 0 && !destinoSelecionado) {
-      renderSugestoes(inputDestino.value);
+    abrirSugestoes();
+  });
+
+  inputDestino.addEventListener('click', () => {
+    if (listaSugestoes.classList.contains('hidden')) {
+      abrirSugestoes();
+    }
+    // Em telas sem touch (desktop), seleciona o texto se já tiver destino para facilitar substituição rápida
+    if (destinoSelecionado && !window.matchMedia('(pointer: coarse)').matches) {
+      inputDestino.select();
     }
   });
 
-  inputDestino.addEventListener('blur', () => {
-    setTimeout(() => {
+  // Fechar lista de sugestões ao clicar fora do campo
+  document.addEventListener('click', (e) => {
+    if (!inputDestino.parentElement.contains(e.target) && !listaSugestoes.contains(e.target)) {
       listaSugestoes.classList.add('hidden');
       inputDestino.setAttribute('aria-expanded', 'false');
       inputDestino.removeAttribute('aria-activedescendant');
-    }, 200);
+      selectedIndex = -1;
+    }
   });
 
   // Keyboard navigation
@@ -577,12 +656,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Re-observe reveal elements
+    // Re-observe reveal elements (fluido e progressivo no celular)
     const revealEls = listagemContainer.querySelectorAll('.reveal-up');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       revealEls.forEach(el => el.classList.add('is-visible'));
     } else {
+      const isTouch = window.matchMedia('(pointer: coarse)').matches || ('ontouchstart' in window);
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -590,7 +670,7 @@ document.addEventListener('DOMContentLoaded', () => {
             obs.unobserve(entry.target);
           }
         });
-      }, { root: null, threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      }, { root: null, threshold: 0.05, rootMargin: isTouch ? '0px 0px 40px 0px' : '0px 0px 20px 0px' });
       revealEls.forEach(el => observer.observe(el));
     }
   }
@@ -657,13 +737,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Reveal animations ---
+  // --- Reveal animations (fluido e progressivo no celular) ---
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealElements = document.querySelectorAll('.reveal-up');
 
   if (prefersReducedMotion) {
     revealElements.forEach(el => el.classList.add('is-visible'));
   } else {
+    const isTouch = window.matchMedia('(pointer: coarse)').matches || ('ontouchstart' in window);
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -671,7 +752,7 @@ document.addEventListener('DOMContentLoaded', () => {
           observer.unobserve(entry.target);
         }
       });
-    }, { root: null, threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { root: null, threshold: 0.05, rootMargin: isTouch ? '0px 0px 40px 0px' : '0px 0px 20px 0px' });
 
     revealElements.forEach(el => revealObserver.observe(el));
 
