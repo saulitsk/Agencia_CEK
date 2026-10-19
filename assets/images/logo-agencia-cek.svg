@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 46" width="82" height="46" fill="none">
+  <defs>
+    <!-- Gradiente Dourado Nobre de Alto Impacto para C&K -->
+    <linearGradient id="cekGold" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#FFE89E"/>
+      <stop offset="35%" stop-color="#F4B93E"/>
+      <stop offset="100%" stop-color="#D98A16"/>
+    </linearGradient>
+
+    <!-- Sombra suave para destacar contra fundos escuros e fotos -->
+    <filter id="cekShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#cekShadow)">
+    <!-- Linha 1: AGÊNCIA (Maior e perfeitamente alinhada com as margens de C&K) -->
+    <text x="0" y="13" 
+          font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" 
+          font-size="12" 
+          font-weight="700" 
+          letter-spacing="3.2" 
+          textLength="78.75" 
+          lengthAdjust="spacing" 
+          fill="#FFFFFF" 
+          fill-opacity="0.95">AGÊNCIA</text>
+
+    <!-- Linha 2: C&K (Protagonista com destaque total, tamanho 34px, extra bold e dourado) -->
+    <text x="0" y="43" 
+          font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" 
+          font-size="34" 
+          font-weight="900" 
+          letter-spacing="0.5" 
+          fill="url(#cekGold)">C&amp;K</text>
+  </g>
+</svg>

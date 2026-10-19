@@ -273,3 +273,46 @@
 input[type="date"] {
     min-height: 50px;
 }
+
+/* Screen-reader only utility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* City listing buttons — light interactive style */
+.listagem-cidade-btn {
+    border: none;
+    background: none;
+    text-decoration: none;
+}
+
+.listagem-cidade-btn:hover {
+    text-decoration: underline;
+    text-decoration-color: rgba(244, 185, 62, 0.6);
+    text-underline-offset: 2px;
+}
+
+/* Custom Calendar Component (25% larger, Agência C&K styled) */
+#calendario-popover {
+    box-shadow: 0 20px 45px -10px rgba(18, 32, 92, 0.28), 0 0 0 1px rgba(198, 197, 209, 0.4);
+    animation: calendarPop 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes calendarPop {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

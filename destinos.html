@@ -7,11 +7,12 @@
 
     <title>Buscar Destinos — Agência C&K</title>
     <meta name="description"
-        content="Busque passagens de São Paulo para mais de 80 destinos na Bahia, Minas Gerais, Goiás e Distrito Federal. Encontre seu destino e consulte valores pelo WhatsApp.">
+        content="Busque passagens de São Paulo para mais de 120 destinos na Bahia, Minas Gerais, Goiás e Distrito Federal. Encontre seu destino e consulte valores pelo WhatsApp.">
     <meta property="og:title" content="Buscar Destinos — Agência C&K">
     <meta property="og:description"
         content="Encontre passagens de ônibus de São Paulo para a Bahia e outros estados com a Agência C&K.">
     <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
@@ -38,9 +39,9 @@
         <div
             class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base max-w-[1440px] mx-auto">
             <a href="index.html"
-                class="font-headline-md text-headline-md font-bold text-vibrant-gold drop-shadow-md outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold focus-visible:rounded-sm"
+                class="flex items-center outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold focus-visible:rounded-sm transition-transform hover:scale-[1.02]"
                 aria-label="Agência C&K, página inicial">
-                Agência C&K
+                <img src="./assets/images/logo-agencia-cek.svg" alt="Agência C&K" class="h-9 md:h-11 w-auto drop-shadow-md">
             </a>
 
             <div class="hidden nav:flex items-center gap-1 px-2 py-2 rounded-full nav-pill" id="nav-pill">
@@ -56,11 +57,11 @@
                         style="font-variation-settings: 'FILL' 1;" aria-hidden="true">map</span>
                     Destinos
                 </a>
-                <a href="index.html#promocoes"
+                <a href="index.html#vantagens"
                     class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200">
                     <span class="material-symbols-outlined text-[16px] leading-none"
                         style="font-variation-settings: 'FILL' 1;" aria-hidden="true">sell</span>
-                    Promoções
+                    Vantagens
                 </a>
                 <a href="index.html#sobre"
                     class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200">
@@ -99,7 +100,9 @@
         class="fixed inset-0 z-[60] bg-deep-navy text-pure-white transform translate-x-full transition-transform duration-300 ease-in-out nav:hidden flex flex-col p-8"
         aria-hidden="true">
         <div class="flex justify-between items-center mb-12">
-            <div class="font-headline-md text-headline-md font-bold text-vibrant-gold">Agência C&K</div>
+            <a href="index.html" aria-label="Agência C&K, início">
+                <img src="./assets/images/logo-agencia-cek.svg" alt="Agência C&K" class="h-9 w-auto">
+            </a>
             <button id="mobile-menu-close" aria-label="Fechar menu mobile"
                 class="p-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold">
                 <span class="material-symbols-outlined text-3xl" aria-hidden="true">close</span>
@@ -111,8 +114,8 @@
                 Viações</a>
             <a href="index.html#destinos" tabindex="-1"
                 class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Destinos</a>
-            <a href="index.html#promocoes" tabindex="-1"
-                class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Promoções</a>
+            <a href="index.html#vantagens" tabindex="-1"
+                class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Vantagens</a>
             <a href="index.html#sobre" tabindex="-1"
                 class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Sobre</a>
             <a href="index.html#contato" tabindex="-1"
@@ -134,9 +137,9 @@
         <!-- HERO + SEARCH CARD                                           -->
         <!-- ============================================================ -->
         <section
-            class="search-hero relative w-full min-h-[70vh] flex items-center justify-center pt-20 pb-16 px-margin-mobile md:px-margin-desktop overflow-hidden">
+            class="search-hero relative w-full min-h-[70vh] flex items-center justify-center pt-20 pb-20 px-margin-mobile md:px-margin-desktop">
             <!-- Background: reutiliza a foto do hero principal -->
-            <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                 <picture class="absolute inset-0 w-full h-full block">
                     <img src="./assets/images/hero-onibus.jpg" alt=""
                         class="w-full h-full object-cover object-center scale-110" aria-hidden="true"
@@ -156,7 +159,7 @@
                         Para onde você <span class="italic text-vibrant-gold">vai?</span>
                     </h1>
                     <p class="font-body-lg text-body-lg text-surface-variant max-w-lg mx-auto">
-                        Passagens de São Paulo para mais de 80 destinos na Bahia e outros estados.
+                        Passagens de São Paulo para mais de 120 destinos na Bahia e outros estados.
                     </p>
                 </div>
 
@@ -207,18 +210,45 @@
                             </div>
                         </div>
 
-                        <!-- Data de Ida (opcional) -->
-                        <div class="search-field-group">
-                            <label for="data-ida"
+                        <!-- Data de Ida (opcional) com Calendário Estilizado 25% maior -->
+                        <div class="search-field-group relative" id="campo-data-grupo">
+                            <label for="data-ida-display"
                                 class="font-label-caps text-label-caps text-deep-navy/70 mb-1.5 flex items-center gap-1.5 tracking-widest uppercase">
                                 <span class="material-symbols-outlined text-[16px] text-vibrant-gold"
                                     style="font-variation-settings: 'FILL' 1;" aria-hidden="true">calendar_month</span>
                                 Data de Ida <span
                                     class="text-outline/50 font-normal normal-case tracking-normal ml-1">(opcional)</span>
                             </label>
-                            <input type="date" id="data-ida"
-                                class="w-full bg-pure-white border border-outline-variant/40 rounded-lg px-4 py-3.5 font-body-md text-body-md text-on-surface focus:border-vibrant-gold focus:ring-2 focus:ring-vibrant-gold/30 transition-all"
-                                aria-label="Data de ida (opcional)">
+                            <div class="relative">
+                                <input type="text" id="data-ida-display" readonly
+                                    placeholder="Selecione a data de ida (opcional)"
+                                    class="w-full bg-pure-white border border-outline-variant/40 rounded-lg px-4 py-3.5 pr-20 font-body-md text-body-md text-on-surface focus:border-vibrant-gold focus:ring-2 focus:ring-vibrant-gold/30 transition-all cursor-pointer selection:bg-transparent"
+                                    aria-label="Data de ida (opcional)"
+                                    aria-haspopup="dialog"
+                                    aria-expanded="false">
+                                
+                                <div class="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                                    <button type="button" id="data-ida-clear" title="Limpar data"
+                                        class="hidden w-7 h-7 flex items-center justify-center text-outline/60 hover:text-error transition-colors rounded-full hover:bg-error/10 cursor-pointer"
+                                        aria-label="Limpar data selecionada">
+                                        <span class="material-symbols-outlined text-[18px]" aria-hidden="true">close</span>
+                                    </button>
+                                    <button type="button" id="data-ida-trigger" title="Abrir calendário"
+                                        class="w-8 h-8 flex items-center justify-center text-vibrant-gold hover:text-deep-navy transition-colors cursor-pointer rounded-lg hover:bg-vibrant-gold/10"
+                                        aria-label="Abrir calendário para escolher data">
+                                        <span class="material-symbols-outlined text-[22px]" aria-hidden="true">event</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Campo oculto para armazenar a data em formato YYYY-MM-DD para o formulário e WhatsApp -->
+                            <input type="hidden" id="data-ida" name="data-ida" value="">
+
+                            <!-- Calendário Estilizado Agência C&K (25% maior, responsivo: modal no mobile / popover no desktop) -->
+                            <div id="calendario-backdrop" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-deep-navy/60 backdrop-blur-xs sm:absolute sm:inset-auto sm:left-0 sm:top-full sm:mt-2 sm:w-[356px] sm:p-0 sm:bg-transparent sm:backdrop-blur-none" role="dialog" aria-modal="true" aria-label="Seletor de data de ida">
+                                <div id="calendario-popover"
+                                    class="bg-pure-white border border-outline-variant/30 rounded-2xl shadow-2xl shadow-deep-navy/25 w-full max-w-[360px] sm:w-[356px] overflow-hidden select-none">
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Divider -->
@@ -276,9 +306,9 @@
     <footer class="bg-deep-navy w-full border-t border-outline-variant/20">
         <div
             class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-8 md:py-10 w-full max-w-[1440px] mx-auto">
-            <div class="font-headline-md text-headline-md text-vibrant-gold mb-4 md:mb-0">
-                Agência C&K
-            </div>
+            <a href="index.html" class="mb-4 md:mb-0 inline-block outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold focus-visible:rounded-sm" aria-label="Agência C&K, início">
+                <img src="./assets/images/logo-agencia-cek.svg" alt="Agência C&K" class="h-8 md:h-9 w-auto">
+            </a>
 
             <nav class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0" aria-label="Rodapé">
                 <a href="termos.html"

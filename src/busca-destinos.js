@@ -2,9 +2,11 @@
  * busca-destinos.js
  * Lógica da página de busca de destinos (destinos.html).
  * — Autocomplete com busca normalizada (sem acentos)
+ * — Seleção por teclado: setas, Enter (exata ou destacada), Escape
  * — Fallback para destino fora do cadastro
  * — Data opcional com validação de data passada
- * — Listagem completa agrupada por UF
+ * — Listagem interativa agrupada por UF (clique → preenche formulário)
+ * — Filtro inline da listagem
  * — Redirecionamento para WhatsApp com mensagem dinâmica
  */
 
@@ -16,27 +18,35 @@ import {
   buscarDestinos,
   agruparPorUF,
   NOMES_UF,
+  DESTINOS,
 } from './destinos-data.js';
+import { initCalendario } from './calendario.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const inputDestino = document.getElementById('destino-input');
   const listaSugestoes = document.getElementById('destino-suggestions');
   const inputData = document.getElementById('data-ida');
+  const inputDataDisplay = document.getElementById('data-ida-display');
   const btnConsultar = document.getElementById('btn-ver-valores');
   const form = document.getElementById('busca-form');
   const listagemContainer = document.getElementById('listagem-destinos');
 
   if (!inputDestino || !listaSugestoes || !btnConsultar) return;
 
+  // --- Inicializar calendário customizado ---
+  const calendario = initCalendario(validarFormulario);
+
   // --- Elemento de erro para data ---
   let dataErroEl = null;
-  if (inputData) {
+  const containerData = document.getElementById('campo-data-grupo') || inputData?.parentElement;
+  if (containerData) {
     dataErroEl = document.createElement('p');
     dataErroEl.className = 'font-body-md text-[13px] text-error mt-1 hidden';
     dataErroEl.setAttribute('role', 'alert');
     dataErroEl.id = 'data-ida-erro';
-    inputData.parentElement.appendChild(dataErroEl);
-    inputData.setAttribute('aria-describedby', 'data-ida-erro');
+    containerData.appendChild(dataErroEl);
+    inputData?.setAttribute('aria-describedby', 'data-ida-erro');
+    inputDataDisplay?.setAttribute('aria-describedby', 'data-ida-erro');
   }
 
   // --- Definir data mínima como hoje ---
@@ -59,12 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Validação de data ---
   function validarData() {
     if (!inputData || !inputData.value) {
-      // Sem data preenchida → válida (data é opcional)
       if (dataErroEl) {
         dataErroEl.textContent = '';
         dataErroEl.classList.add('hidden');
       }
-      if (inputData) inputData.classList.remove('border-error');
+      inputDataDisplay?.classList.remove('border-error');
       return true;
     }
 
@@ -74,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dataErroEl.textContent = 'A data não pode ser anterior a hoje.';
         dataErroEl.classList.remove('hidden');
       }
-      inputData.classList.add('border-error');
+      inputDataDisplay?.classList.add('border-error');
       return false;
     }
 
@@ -82,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dataErroEl.textContent = '';
       dataErroEl.classList.add('hidden');
     }
-    inputData.classList.remove('border-error');
+    inputDataDisplay?.classList.remove('border-error');
     return true;
   }
 
@@ -108,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
       liMsg.className = 'suggestion-item suggestion-empty';
       liMsg.setAttribute('role', 'option');
       liMsg.setAttribute('aria-disabled', 'true');
+      liMsg.setAttribute('aria-selected', 'false');
       liMsg.innerHTML = `<span class="material-symbols-outlined text-[16px] mr-2 opacity-50" aria-hidden="true">search_off</span>Não encontrou seu destino? Consulte nossa equipe pelo WhatsApp.`;
       listaSugestoes.appendChild(liMsg);
 
@@ -116,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
       liFallback.className = 'suggestion-item suggestion-fallback';
       liFallback.setAttribute('role', 'option');
       liFallback.setAttribute('id', 'suggestion-fallback');
+      liFallback.setAttribute('aria-selected', 'false');
       liFallback.setAttribute('data-fallback', 'true');
       liFallback.innerHTML = `<span class="material-symbols-outlined text-[16px] mr-2 text-vibrant-gold" aria-hidden="true">chat</span>Consultar "<strong>${escapeHtml(termo)}</strong>"`;
 
@@ -136,10 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
       li.className = 'suggestion-item';
       li.setAttribute('role', 'option');
       li.setAttribute('id', `suggestion-${i}`);
+      li.setAttribute('aria-selected', 'false');
       li.setAttribute('data-nome', destino.nome);
       li.setAttribute('data-uf', destino.uf);
 
-      // Highlight matching text (based on normalized comparison)
+      // Highlight matching text
       const nomeNorm = normalizar(destino.nome);
       const idx = nomeNorm.indexOf(termoNorm);
       let nomeHtml;
@@ -171,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     liConsultar.className = 'suggestion-item suggestion-fallback';
     liConsultar.setAttribute('role', 'option');
     liConsultar.setAttribute('id', `suggestion-fallback`);
+    liConsultar.setAttribute('aria-selected', 'false');
     liConsultar.setAttribute('data-fallback', 'true');
     liConsultar.innerHTML = `<span class="material-symbols-outlined text-[16px] mr-2 text-outline/50" aria-hidden="true">help_outline</span><span class="text-on-surface/60">Consultar "<strong>${escapeHtml(termo)}</strong>" mesmo assim</span>`;
 
@@ -200,7 +213,31 @@ document.addEventListener('DOMContentLoaded', () => {
     inputDestino.removeAttribute('aria-activedescendant');
     selectedIndex = -1;
     validarFormulario();
-    if (inputData) inputData.focus();
+    if (inputDataDisplay) {
+      inputDataDisplay.focus();
+      calendario?.abrir();
+    }
+  }
+
+  /**
+   * Seleciona a cidade a partir da listagem inferior e rola até o formulário.
+   */
+  function selecionarCidadeDaListagem(destino) {
+    selecionarCidade(destino);
+    // Rolar suavemente até o formulário
+    const formEl = document.getElementById('busca-form');
+    if (formEl) {
+      formEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Focar no campo de data (ou botão) após a rolagem
+      setTimeout(() => {
+        if (inputDataDisplay) {
+          inputDataDisplay.focus();
+          calendario?.abrir();
+        } else {
+          btnConsultar.focus();
+        }
+      }, 600);
+    }
   }
 
   function consultarDestinoLivre(texto) {
@@ -222,7 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   inputDestino.addEventListener('input', () => {
-    // Se o usuário edita o campo, limpa a seleção anterior
     destinoSelecionado = null;
     renderSugestoes(inputDestino.value);
     validarFormulario();
@@ -245,18 +281,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Keyboard navigation
   inputDestino.addEventListener('keydown', (e) => {
     const items = listaSugestoes.querySelectorAll('.suggestion-item:not(.suggestion-empty)');
-    if (items.length === 0) return;
 
     if (e.key === 'ArrowDown') {
       e.preventDefault();
+      if (items.length === 0) return;
       selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
       updateSelection(items);
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
+      if (items.length === 0) return;
       selectedIndex = Math.max(selectedIndex - 1, 0);
       updateSelection(items);
     } else if (e.key === 'Enter') {
       e.preventDefault();
+
+      // 1) Se há um item destacado pelas setas, seleciona-o
       if (selectedIndex >= 0 && items[selectedIndex]) {
         const item = items[selectedIndex];
         if (item.dataset.fallback === 'true') {
@@ -264,7 +303,26 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           selecionarCidade({ nome: item.dataset.nome, uf: item.dataset.uf });
         }
+        return;
       }
+
+      // 2) Se não há item destacado, tenta correspondência exata pelo texto digitado
+      const texto = inputDestino.value.trim();
+      if (texto.length > 0 && !destinoSelecionado) {
+        const textoNorm = normalizar(texto);
+        const exactMatch = DESTINOS.find(d => normalizar(d.nome) === textoNorm);
+        if (exactMatch) {
+          selecionarCidade(exactMatch);
+          return;
+        }
+      }
+
+      // 3) Se já tem destino selecionado, submete o formulário
+      if (destinoSelecionado && !btnConsultar.disabled) {
+        form?.dispatchEvent(new Event('submit', { cancelable: true }));
+      }
+      // Se nenhuma condição se aplica, Enter não faz nada (não submete sem destino)
+
     } else if (e.key === 'Escape') {
       listaSugestoes.classList.add('hidden');
       inputDestino.setAttribute('aria-expanded', 'false');
@@ -277,13 +335,14 @@ document.addEventListener('DOMContentLoaded', () => {
     items.forEach((item, i) => {
       if (i === selectedIndex) {
         item.classList.add('is-selected');
+        item.setAttribute('aria-selected', 'true');
         item.scrollIntoView({ block: 'nearest' });
         inputDestino.setAttribute('aria-activedescendant', item.id);
       } else {
         item.classList.remove('is-selected');
+        item.setAttribute('aria-selected', 'false');
       }
     });
-    // If nothing is selected, clear the attribute
     if (selectedIndex < 0) {
       inputDestino.removeAttribute('aria-activedescendant');
     }
@@ -316,8 +375,6 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (btnConsultar.disabled || !destinoSelecionado) return;
-
-      // Double-check date validity before sending
       if (!validarData()) return;
 
       let dataStr = 'a definir';
@@ -339,30 +396,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const termoNorm = normalizar(destinoParam);
     const matches = buscarDestinos(destinoParam);
 
-    // Só seleciona automaticamente se houver correspondência EXATA (ignorando acentos/caixa)
+    // Só seleciona automaticamente se houver correspondência EXATA
     const exactMatch = matches.find(d => normalizar(d.nome) === termoNorm);
 
     if (exactMatch) {
       selecionarCidade(exactMatch);
     } else {
-      // Sem correspondência exata: preenche o campo e mostra sugestões, mas NÃO seleciona
       inputDestino.value = destinoParam;
       destinoSelecionado = null;
       renderSugestoes(destinoParam);
     }
   }
 
-  // Validar estado inicial
   validarFormulario();
 
-  // --- Listagem completa de destinos ---
+  // --- Listagem completa de destinos (interativa) ---
   if (listagemContainer) {
     renderListagem();
   }
 
   function renderListagem() {
     const grupos = agruparPorUF();
-    let html = '';
+
+    // --- Filtro de busca na listagem ---
+    let filterHtml = `
+      <div class="mb-8 reveal-up">
+        <label for="filtro-listagem" class="font-label-caps text-label-caps text-deep-navy/70 mb-1.5 flex items-center gap-1.5 tracking-widest uppercase">
+          <span class="material-symbols-outlined text-[16px] text-vibrant-gold" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">filter_list</span>
+          Buscar cidade na lista
+        </label>
+        <div class="relative max-w-md">
+          <input type="text" id="filtro-listagem" placeholder="Ex: Irecê, Brumado, Montes Claros…"
+            autocomplete="off"
+            class="w-full bg-pure-white border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface placeholder:text-outline/50 focus:border-vibrant-gold focus:ring-2 focus:ring-vibrant-gold/30 transition-all"
+            aria-label="Filtrar cidades na listagem"
+            aria-describedby="filtro-status">
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-[18px] text-outline/50" aria-hidden="true">search</span>
+        </div>
+        <p id="filtro-status" class="sr-only" aria-live="polite" role="status"></p>
+      </div>
+    `;
+
+    let listaHtml = '';
 
     for (const [uf, destinos] of Object.entries(grupos)) {
       if (destinos.length === 0) continue;
@@ -370,17 +445,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const nomeEstado = NOMES_UF[uf] || uf;
       const isPrimario = uf === 'BA';
 
-      html += `
-        <div class="listagem-uf-group ${isPrimario ? 'listagem-uf-primary' : ''} reveal-up">
+      listaHtml += `
+        <div class="listagem-uf-group ${isPrimario ? 'listagem-uf-primary' : ''} reveal-up" data-uf="${uf}">
           <h3 class="font-headline-md text-headline-md text-deep-navy mb-4 flex items-center gap-2">
             <span class="material-symbols-outlined text-vibrant-gold" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">location_on</span>
             ${nomeEstado}
-            <span class="text-[13px] font-normal text-outline ml-1">(${destinos.length} ${destinos.length === 1 ? 'destino' : 'destinos'})</span>
+            <span class="text-[13px] font-normal text-outline ml-1 listagem-uf-count">(${destinos.length} ${destinos.length === 1 ? 'destino' : 'destinos'})</span>
           </h3>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-2">
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-1">
             ${destinos.map(d => {
               const detalheHtml = d.detalhe ? `<span class="block text-[11px] text-outline/60 leading-tight">${d.detalhe}</span>` : '';
-              return `<div class="font-body-md text-body-md text-on-surface py-1.5">${d.nome}${detalheHtml}</div>`;
+              return `<button type="button" class="listagem-cidade-btn text-left font-body-md text-body-md text-on-surface py-1.5 px-1 -mx-1 rounded hover:bg-vibrant-gold/10 hover:text-deep-navy focus-visible:ring-2 focus-visible:ring-vibrant-gold focus-visible:rounded transition-colors cursor-pointer" data-nome="${escapeHtml(d.nome)}" data-uf="${d.uf}" data-detalhe="${d.detalhe || ''}" aria-label="Selecionar ${d.nome}, ${NOMES_UF[d.uf] || d.uf}">${d.nome}${detalheHtml}</button>`;
             }).join('')}
           </div>
         </div>
@@ -388,8 +463,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // "Não encontrou sua cidade?"
-    html += `
-      <div class="mt-10 p-6 bg-cream-canvas rounded-lg border border-vibrant-gold/20 text-center reveal-up">
+    listaHtml += `
+      <div class="mt-10 p-6 bg-cream-canvas rounded-lg border border-vibrant-gold/20 text-center reveal-up" id="listagem-nao-encontrou">
         <p class="font-body-md text-body-md text-on-surface mb-3">
           <span class="material-symbols-outlined text-vibrant-gold align-middle mr-1" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">help</span>
           <strong>Não encontrou sua cidade?</strong>
@@ -406,9 +481,103 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
-    listagemContainer.innerHTML = html;
+    // Mensagem de "sem resultados" do filtro (inicialmente oculta)
+    listaHtml += `
+      <div id="filtro-sem-resultado" class="hidden mt-6 p-6 bg-cream-canvas rounded-lg border border-vibrant-gold/20 text-center">
+        <p class="font-body-md text-body-md text-on-surface mb-3">
+          <span class="material-symbols-outlined text-outline align-middle mr-1" aria-hidden="true">search_off</span>
+          <strong>Nenhuma cidade encontrada para este termo.</strong>
+        </p>
+        <p class="font-body-md text-[14px] text-on-surface/70 mb-4">
+          Verifique a grafia ou consulte nossa equipe pelo WhatsApp.
+        </p>
+        <a href="https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent('Olá! Gostaria de saber se vocês atendem um destino que não encontrei no site, saindo de São Paulo.')}"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 bg-vibrant-gold text-deep-navy px-6 py-3 rounded-lg font-headline-md font-bold text-[14px] tracking-tight hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#12205C] transition-all">
+          <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
+          Consultar pelo WhatsApp
+        </a>
+      </div>
+    `;
 
-    // Re-observe reveal elements in the newly rendered content
+    listagemContainer.innerHTML = filterHtml + listaHtml;
+
+    // --- Attach click handlers to city buttons ---
+    listagemContainer.querySelectorAll('.listagem-cidade-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const destino = { nome: btn.dataset.nome, uf: btn.dataset.uf };
+        selecionarCidadeDaListagem(destino);
+      });
+    });
+
+    // --- Filtro inline ---
+    const filtroInput = document.getElementById('filtro-listagem');
+    const filtroStatus = document.getElementById('filtro-status');
+    const semResultadoEl = document.getElementById('filtro-sem-resultado');
+    const naoEncontrouEl = document.getElementById('listagem-nao-encontrou');
+
+    if (filtroInput) {
+      filtroInput.addEventListener('input', () => {
+        const termo = filtroInput.value.trim();
+        const termoNorm = normalizar(termo);
+        const groups = listagemContainer.querySelectorAll('.listagem-uf-group');
+        let totalVisible = 0;
+
+        groups.forEach(group => {
+          const buttons = group.querySelectorAll('.listagem-cidade-btn');
+          let groupVisible = 0;
+
+          buttons.forEach(btn => {
+            const nomeNorm = normalizar(btn.dataset.nome);
+            const ufNorm = normalizar(btn.dataset.uf);
+            const detalheNorm = normalizar(btn.dataset.detalhe || '');
+            const match = termoNorm.length === 0 ||
+              nomeNorm.includes(termoNorm) ||
+              ufNorm.includes(termoNorm) ||
+              detalheNorm.includes(termoNorm);
+
+            btn.style.display = match ? '' : 'none';
+            if (match) groupVisible++;
+          });
+
+          group.style.display = groupVisible > 0 ? '' : 'none';
+          // Update count
+          const countEl = group.querySelector('.listagem-uf-count');
+          if (countEl && termoNorm.length > 0) {
+            countEl.textContent = `(${groupVisible} ${groupVisible === 1 ? 'destino' : 'destinos'})`;
+          } else if (countEl) {
+            // Reset count
+            const uf = group.dataset.uf;
+            const total = DESTINOS.filter(d => d.uf === uf).length;
+            countEl.textContent = `(${total} ${total === 1 ? 'destino' : 'destinos'})`;
+          }
+          totalVisible += groupVisible;
+        });
+
+        // Mostrar/ocultar mensagem de "sem resultado"
+        if (termoNorm.length > 0 && totalVisible === 0) {
+          semResultadoEl?.classList.remove('hidden');
+          naoEncontrouEl?.classList.add('hidden');
+        } else {
+          semResultadoEl?.classList.add('hidden');
+          naoEncontrouEl?.classList.toggle('hidden', termoNorm.length > 0 && totalVisible > 0 && totalVisible < DESTINOS.length);
+          if (termoNorm.length === 0) naoEncontrouEl?.classList.remove('hidden');
+        }
+
+        // Status para leitores de tela
+        if (filtroStatus) {
+          if (termoNorm.length === 0) {
+            filtroStatus.textContent = `${DESTINOS.length} destinos disponíveis.`;
+          } else if (totalVisible === 0) {
+            filtroStatus.textContent = 'Nenhum destino encontrado.';
+          } else {
+            filtroStatus.textContent = `${totalVisible} ${totalVisible === 1 ? 'destino encontrado' : 'destinos encontrados'}.`;
+          }
+        }
+      });
+    }
+
+    // Re-observe reveal elements
     const revealEls = listagemContainer.querySelectorAll('.reveal-up');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
@@ -443,14 +612,12 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenu.classList.remove('translate-x-full');
         mobileMenu.classList.add('translate-x-0');
         document.body.style.overflow = 'hidden';
-        // Make focusable
         focusableEls.forEach(el => el.removeAttribute('tabindex'));
         setTimeout(() => mobileMenuCloseBtn?.focus(), 300);
       } else {
         mobileMenu.classList.add('translate-x-full');
         mobileMenu.classList.remove('translate-x-0');
         document.body.style.overflow = '';
-        // Remove from tab order
         focusableEls.forEach(el => el.setAttribute('tabindex', '-1'));
         mobileMenuBtn.focus();
       }
@@ -459,19 +626,16 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileMenuBtn.addEventListener('click', () => toggleMenu());
     mobileMenuCloseBtn?.addEventListener('click', () => toggleMenu(false));
 
-    // Close on link click
     focusableEls.forEach(link => {
       link.addEventListener('click', () => toggleMenu(false));
     });
 
-    // Close on ESC
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobileMenuBtn.getAttribute('aria-expanded') === 'true') {
         toggleMenu(false);
       }
     });
 
-    // Focus trap
     mobileMenu.addEventListener('keydown', (e) => {
       if (e.key !== 'Tab') return;
       const focusable = Array.from(mobileMenu.querySelectorAll('a:not([tabindex="-1"]), button:not([tabindex="-1"])'));
@@ -511,7 +675,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Force-reveal hero elements
     setTimeout(() => {
       document.querySelectorAll('.search-hero .reveal-up').forEach(el => el.classList.add('is-visible'));
     }, 100);

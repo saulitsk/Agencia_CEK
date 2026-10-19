@@ -12,6 +12,7 @@
     <meta property="og:description"
         content="Várias viações, uma só agência de confiança. Passagens de São Paulo para mais de 200 cidades na Bahia.">
     <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
@@ -57,9 +58,9 @@
         <div
             class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base max-w-[1440px] mx-auto">
             <a href="index.html"
-                class="font-headline-md text-headline-md font-bold text-vibrant-gold drop-shadow-md outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold focus-visible:rounded-sm"
+                class="flex items-center outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold focus-visible:rounded-sm transition-transform hover:scale-[1.02]"
                 aria-label="Agência C&K, página inicial">
-                Agência C&K
+                <img src="./assets/images/logo-agencia-cek.svg" alt="Agência C&K" class="h-9 md:h-11 w-auto drop-shadow-md">
             </a>
 
             <!-- Nav pill capsule -->
@@ -78,12 +79,12 @@
                         style="font-variation-settings: 'FILL' 1;" aria-hidden="true">map</span>
                     Destinos
                 </a>
-                <a href="#promocoes"
+                <a href="#vantagens"
                     class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200"
-                    data-section="promocoes">
+                    data-section="vantagens">
                     <span class="material-symbols-outlined text-[16px] leading-none"
                         style="font-variation-settings: 'FILL' 1;" aria-hidden="true">sell</span>
-                    Promoções
+                    Vantagens
                 </a>
                 <a href="#sobre"
                     class="nav-link flex items-center gap-1.5 px-4 py-2 rounded-full font-headline-md font-bold text-[13px] tracking-tight text-pure-white transition-all duration-200"
@@ -124,7 +125,9 @@
         class="fixed inset-0 z-[60] bg-deep-navy text-pure-white transform translate-x-full transition-transform duration-300 ease-in-out nav:hidden flex flex-col p-8"
         aria-hidden="true">
         <div class="flex justify-between items-center mb-12">
-            <div class="font-headline-md text-headline-md font-bold text-vibrant-gold">Agência C&K</div>
+            <a href="index.html" aria-label="Agência C&K, início">
+                <img src="./assets/images/logo-agencia-cek.svg" alt="Agência C&K" class="h-9 w-auto">
+            </a>
             <button id="mobile-menu-close" aria-label="Fechar menu mobile"
                 class="p-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold">
                 <span class="material-symbols-outlined text-3xl" aria-hidden="true">close</span>
@@ -136,8 +139,8 @@
                 Viações</a>
             <a href="#destinos" tabindex="-1"
                 class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Destinos</a>
-            <a href="#promocoes" tabindex="-1"
-                class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Promoções</a>
+            <a href="#vantagens" tabindex="-1"
+                class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Vantagens</a>
             <a href="#sobre" tabindex="-1"
                 class="font-headline-md text-headline-md hover:text-vibrant-gold transition-colors inline-block w-max">Sobre</a>
             <a href="#contato" tabindex="-1"
@@ -158,7 +161,7 @@
         <!-- ============================================================ -->
         <!-- HERO SECTION                                                  -->
         <!-- ============================================================ -->
-        <header class="relative w-full h-[884px] min-h-[600px] flex items-center pt-24 overflow-hidden">
+        <header class="relative w-full h-[780px] md:h-[884px] min-h-[560px] flex items-center pt-20 md:pt-24 overflow-hidden">
             <div class="absolute inset-0 z-0">
                 <picture class="absolute inset-0 w-full h-full block">
                     <img src="./assets/images/hero-onibus.jpg"
@@ -172,22 +175,22 @@
 
             <div class="relative z-10 w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col items-center md:items-start text-center md:text-left reveal-up"
                 style="transition-delay: 0.2s">
-                <div class="font-label-caps text-label-caps text-vibrant-gold mb-4 tracking-widest uppercase">Agência de
+                <div class="font-label-caps text-label-caps text-vibrant-gold mb-3 md:mb-4 tracking-widest uppercase">Agência de
                     Passagens — Praça da Árvore</div>
                 <h1
-                    class="font-display-xl text-headline-lg-mobile md:text-display-xl text-pure-white max-w-4xl mb-6 tracking-tight">
+                    class="font-display-xl text-headline-lg-mobile md:text-display-xl text-pure-white max-w-4xl mb-4 md:mb-6 tracking-tight">
                     Várias viações, uma só agência de <span class="italic text-vibrant-gold">confiança</span>
                 </h1>
-                <p class="font-body-lg text-body-lg text-surface-variant max-w-xl mb-10 md:ml-2">
+                <p class="font-body-lg text-body-lg text-surface-variant max-w-xl mb-8 md:mb-10 md:ml-2">
                     Nossas viações parceiras oferecem serviço de qualidade e confiança
                     para mais de 200 cidades na Bahia e outros estados como Minas Gerais, Goiás, Distrito Federal e
                     muito mais.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 md:ml-2">
-                    <a href="#viacoes"
+                    <a href="destinos.html"
                         class="flex items-center justify-center gap-2 bg-vibrant-gold text-deep-navy px-8 py-4 rounded-full font-sans font-bold text-[15px] tracking-tight hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_#12205C] transition-all">
-                        <span>Conheça nossas viações</span>
-                        <span class="material-symbols-outlined text-[20px]" aria-hidden="true">arrow_forward</span>
+                        <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">search</span>
+                        <span>Buscar meu destino</span>
                     </a>
                     <a href="https://wa.me/5511954047211?text=Ol%C3%A1%21%20Gostaria%20de%20consultar%20os%20hor%C3%A1rios%20e%20comprar%20uma%20passagem."
                         target="_blank" rel="noopener noreferrer"
@@ -281,17 +284,16 @@
                                 Viação</div>
                             <h3 class="font-headline-md text-headline-md text-pure-white mb-4 leading-snug">EMTRAM</h3>
                             <p class="font-body-md text-body-md text-surface-variant flex-1 mb-6">
-                                Conectando <strong class="text-pure-white">São Paulo à
-                                    Bahia</strong>, com conforto e segurança em cada viagem. Também atende
-                                destinos em
-                                outros estados.
+                                Conhecida como a <strong class="text-pure-white">Rainha da Chapada</strong>,
+                                transporta a Bahia desde 1965 com a frota interestadual mais moderna do estado:
+                                ônibus Euro 6 e os novos Double Decker.
                             </p>
                             <div class="mt-auto space-y-3">
                                 <div
                                     class="flex items-center space-x-2 font-label-caps text-label-caps text-vibrant-gold/80">
                                     <span class="material-symbols-outlined text-[16px]"
                                         aria-hidden="true">verified</span>
-                                    <span>Rede ampla SP → BA, MG, DF, GO</span>
+                                    <span>Presente em 7 estados</span>
                                 </div>
                                 <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20passagem%20pela%20EMTRAM."
                                     target="_blank" rel="noopener noreferrer" id="cta-emtram"
@@ -347,11 +349,11 @@
                         class="company-card group relative flex flex-col bg-pure-white/5 border border-pure-white/10 rounded-lg overflow-hidden hover:border-vibrant-gold/60 transition-all duration-300 hover:-translate-y-1 reveal-up"
                         style="transition-delay: 0.4s" aria-label="Gil Turismo">
                         <div class="p-8 flex-1 flex flex-col">
-                            <!-- TODO: Logo Gil Turismo (substituir por img quando o logo for fornecido) -->
+                            <!-- Logo Gil Turismo -->
                             <div
-                                class="inline-flex items-center justify-center w-[90px] h-[90px] rounded-lg bg-white mb-6 overflow-hidden p-2 text-deep-navy font-headline-md text-[14px] leading-tight text-center font-bold">
-                                <!-- <img src="./assets/images/logo-gil-turismo.png" alt="Logo Gil Turismo" class="w-full h-full object-contain"> -->
-                                Gil Turismo
+                                class="inline-flex items-center justify-center w-[90px] h-[90px] rounded-lg bg-white mb-6 overflow-hidden p-2">
+                                <img src="./assets/images/logo-gil-turismo.svg" alt="Logo Gil Turismo"
+                                    class="w-full h-full object-contain">
                             </div>
                             <div
                                 class="font-label-caps text-label-caps text-vibrant-gold mb-2 tracking-widest uppercase">
@@ -570,20 +572,19 @@
         </section>
 
         <!-- ============================================================ -->
-        <!-- SEÇÃO: PROMOÇÕES — 3 bilhetes, um por empresa                -->
+        <!-- SEÇÃO: VANTAGENS DAS PARCEIRAS                               -->
         <!-- ============================================================ -->
         <section class="py-section-gap bg-deep-navy relative overflow-hidden flex flex-col items-center justify-center"
-            id="promocoes" aria-labelledby="promo-title">
+            id="vantagens" aria-labelledby="vantagens-title">
             <!-- Abstract background elements -->
             <div class="absolute top-0 left-0 w-full h-32 bg-surface" style="clip-path: ellipse(70% 100% at 50% 0%);"
                 aria-hidden="true"></div>
 
             <div class="relative z-10 text-center mb-16 mt-8 reveal-up">
-                <div class="font-label-caps text-label-caps text-vibrant-gold mb-4 tracking-widest uppercase">Ofertas
-                    Especiais</div>
-                <h2 id="promo-title"
+                <div class="font-label-caps text-label-caps text-vibrant-gold mb-4 tracking-widest uppercase">Condições e Opções</div>
+                <h2 id="vantagens-title"
                     class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-pure-white">
-                    Promoções das <span class="italic text-vibrant-gold">Parceiras</span>
+                    Vantagens das <span class="italic text-vibrant-gold">Parceiras</span>
                 </h2>
             </div>
 
@@ -612,10 +613,10 @@
                             <span class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">sem
                                 juros</span>
                         </div>
-                        <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20vi%20a%20promo%C3%A7%C3%A3o%20da%20Novo%20Horizonte%20em%20at%C3%A9%206x%20sem%20juros%20e%20quero%20garantir%20minha%20passagem%21"
+                        <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20uma%20passagem%20pela%20Novo%20Horizonte%20com%20parcelamento%20em%20at%C3%A9%206x%20sem%20juros."
                             target="_blank" rel="noopener noreferrer"
                             class="bg-deep-navy text-vibrant-gold px-4 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
-                            Garantir Oferta
+                            Consultar Passagem
                         </a>
                     </div>
                     <!-- Ticket cutouts -->
@@ -640,17 +641,17 @@
                     <div
                         class="border-t border-dashed border-deep-navy/30 pt-6 flex flex-col items-center flex-1 justify-between">
                         <div class="text-center mb-6">
-                            <span class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">Rede
-                                com</span>
+                            <span class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">Presente
+                                em</span>
                             <span
-                                class="block font-display-xl text-[56px] font-extrabold text-vibrant-gold leading-none drop-shadow-sm">200+</span>
+                                class="block font-display-xl text-[56px] font-extrabold text-vibrant-gold leading-none drop-shadow-sm">7</span>
                             <span
-                                class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">destinos</span>
+                                class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">estados</span>
                         </div>
                         <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20passagens%20pela%20EMTRAM%21"
                             target="_blank" rel="noopener noreferrer"
                             class="bg-deep-navy text-vibrant-gold px-4 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
-                            Consultar Horários
+                            Consultar Passagem
                         </a>
                     </div>
                     <div
@@ -681,10 +682,10 @@
                             <span class="block font-headline-md text-[20px] font-bold text-deep-navy leading-tight">por
                                 semana</span>
                         </div>
-                        <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20passagem%20pela%20Anjos%20Turismo%20de%20SP%20para%20Irec%C3%AA%21"
+                        <a href="https://wa.me/5511954047211?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20uma%20passagem%20pela%20Anjos%20Turismo%20de%20SP%20para%20Irec%C3%AA."
                             target="_blank" rel="noopener noreferrer"
                             class="bg-deep-navy text-vibrant-gold px-4 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
-                            Garantir Vaga
+                            Consultar Passagem
                         </a>
                     </div>
                     <div
@@ -720,7 +721,7 @@
                         <a href="https://wa.me/5511954047211?text=Ol%C3%A1%21%20Gostaria%20de%20consultar%20uma%20passagem%20pela%20Gil%20Turismo%2C%20de%20S%C3%A3o%20Paulo%20para%20Irec%C3%AA."
                             target="_blank" rel="noopener noreferrer"
                             class="bg-deep-navy text-vibrant-gold px-4 py-3 rounded-lg font-body-md text-label-caps font-bold hover:-translate-y-1 hover:shadow-[0px_4px_0px_0px_rgba(244,185,62,0.5)] transition-all w-full text-center">
-                            Consultar Valor
+                            Consultar Passagem
                         </a>
                     </div>
                     <div
@@ -872,7 +873,17 @@
                             <div class="flex items-start gap-3">
                                 <span class="material-symbols-outlined text-vibrant-gold text-[20px] mt-0.5"
                                     aria-hidden="true">call</span>
-                                <p class="font-body-md text-body-md text-pure-white font-medium">(11) 95404-7211</p>
+                                <a href="tel:+5511954047211" aria-label="Ligar para a Agência C&K"
+                                    class="font-body-md text-body-md text-pure-white font-medium hover:text-vibrant-gold focus-visible:text-vibrant-gold transition-colors">(11) 95404-7211</a>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-vibrant-gold text-[20px] mt-0.5"
+                                    aria-hidden="true">schedule</span>
+                                <div>
+                                    <p class="font-body-md text-body-md text-pure-white font-medium">Horário de atendimento</p>
+                                    <p class="font-body-md text-body-md text-surface-variant">Seg a sex: 9h às 18h</p>
+                                    <p class="font-body-md text-body-md text-surface-variant">Sábado: 9h às 16h</p>
+                                </div>
                             </div>
                         </address>
 
@@ -901,9 +912,9 @@
     <footer class="bg-deep-navy w-full border-t border-outline-variant/20">
         <div
             class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-8 md:py-10 w-full max-w-[1440px] mx-auto">
-            <div class="font-headline-md text-headline-md text-vibrant-gold mb-4 md:mb-0">
-                Agência C&K
-            </div>
+            <a href="index.html" class="mb-4 md:mb-0 inline-block outline-none focus-visible:ring-2 focus-visible:ring-vibrant-gold focus-visible:rounded-sm" aria-label="Agência C&K, início">
+                <img src="./assets/images/logo-agencia-cek.svg" alt="Agência C&K" class="h-8 md:h-9 w-auto">
+            </a>
 
             <nav class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0" aria-label="Rodapé">
                 <a href="termos.html"

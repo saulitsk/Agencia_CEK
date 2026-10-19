@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <!-- Fundo branco suave -->
+  <rect width="160" height="160" rx="16" fill="#FFFFFF"/>
+  
+  <g transform="translate(14, 28)">
+    <!-- Ícone estilizado de rota / estrada no topo -->
+    <path d="M46 16 C 54 8, 78 8, 86 16 C 76 13, 56 13, 46 16 Z" fill="#FFA200"/>
+    <path d="M38 22 C 50 14, 82 14, 94 22 C 80 18, 52 18, 38 22 Z" fill="#FF6A00"/>
+    
+    <!-- Texto GIL em fonte forte, itálica e moderna -->
+    <text x="66" y="62" 
+          font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+          font-size="44" 
+          font-weight="900" 
+          font-style="italic" 
+          fill="#FF5500" 
+          text-anchor="middle"
+          letter-spacing="1">GIL</text>
+    
+    <!-- Faixa / Trilha dinâmica sob GIL -->
+    <path d="M22 72 Q 66 68 110 72 Q 66 75 22 72 Z" fill="#FF7A00"/>
+    <path d="M30 76 Q 66 74 102 76" stroke="#FFA200" stroke-width="2" stroke-linecap="round" fill="none"/>
+    
+    <!-- Texto TURISMO com espaçamento elegante -->
+    <text x="66" y="93" 
+          font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+          font-size="13" 
+          font-weight="800" 
+          fill="#D9480F" 
+          text-anchor="middle"
+          letter-spacing="5">TURISMO</text>
+  </g>
+</svg>
