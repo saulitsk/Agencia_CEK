@@ -123,8 +123,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // If reduced motion, show immediately
             revealElements.forEach(el => el.classList.add('is-visible'));
         } else {
-            // Margem positiva para que os elementos comecem a deslizar suavemente antes de bater no rodapé da tela
-            const rootMargin = isTouchDevice ? "0px 0px 40px 0px" : "0px 0px 20px 0px";
+            // Margem antecipada no celular (400px) para que o conteúdo já inicie a transição bem antes
+            // de alcançar a tela visível, garantindo que o usuário nunca veja blocos em branco ou elementos "aparecendo do nada"
+            const rootMargin = isTouchDevice ? "0px 0px 400px 0px" : "0px 0px 60px 0px";
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -134,16 +135,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }, {
                 root: null,
-                threshold: 0.05,
+                threshold: 0,
                 rootMargin: rootMargin
             });
             
             revealElements.forEach(el => revealObserver.observe(el));
             
-            // Make sure hero elements are revealed immediately if they are at the top
-            setTimeout(() => {
-                document.querySelectorAll('header .reveal-up').forEach(el => el.classList.add('is-visible'));
-            }, 100);
+            // Revelar imediatamente todos os elementos da primeira dobra e proximidades (1.5x altura da tela)
+            const revealInitial = () => {
+                const threshold = window.innerHeight * 1.5;
+                revealElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= threshold) {
+                        el.classList.add('is-visible');
+                    }
+                });
+            };
+            revealInitial();
+            setTimeout(revealInitial, 100);
         }
     }
 

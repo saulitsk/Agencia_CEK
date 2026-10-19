@@ -656,7 +656,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Re-observe reveal elements (fluido e progressivo no celular)
+    // Re-observe reveal elements (fluido e progressivo no celular com 400px de antecipação)
     const revealEls = listagemContainer.querySelectorAll('.reveal-up');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
@@ -670,7 +670,7 @@ document.addEventListener('DOMContentLoaded', () => {
             obs.unobserve(entry.target);
           }
         });
-      }, { root: null, threshold: 0.05, rootMargin: isTouch ? '0px 0px 40px 0px' : '0px 0px 20px 0px' });
+      }, { root: null, threshold: 0, rootMargin: isTouch ? '0px 0px 400px 0px' : '0px 0px 60px 0px' });
       revealEls.forEach(el => observer.observe(el));
     }
   }
@@ -737,7 +737,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Reveal animations (fluido e progressivo no celular) ---
+  // --- Reveal animations (fluido e progressivo no celular com 400px de antecipação) ---
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealElements = document.querySelectorAll('.reveal-up');
 
@@ -752,12 +752,21 @@ document.addEventListener('DOMContentLoaded', () => {
           observer.unobserve(entry.target);
         }
       });
-    }, { root: null, threshold: 0.05, rootMargin: isTouch ? '0px 0px 40px 0px' : '0px 0px 20px 0px' });
+    }, { root: null, threshold: 0, rootMargin: isTouch ? '0px 0px 400px 0px' : '0px 0px 60px 0px' });
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    setTimeout(() => {
-      document.querySelectorAll('.search-hero .reveal-up').forEach(el => el.classList.add('is-visible'));
-    }, 100);
+    // Revelar imediatamente elementos da primeira dobra e arredores
+    const revealInitial = () => {
+      const threshold = window.innerHeight * 1.5;
+      revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= threshold) {
+          el.classList.add('is-visible');
+        }
+      });
+    };
+    revealInitial();
+    setTimeout(revealInitial, 100);
   }
 });
