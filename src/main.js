@@ -156,6 +156,44 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // --- 5b. Mobile Carousels (indicadores de posição) ---
+    document.querySelectorAll('.mobile-carousel').forEach(carousel => {
+        const slides = Array.from(carousel.children);
+        if (slides.length < 2) return;
+
+        const dots = document.createElement('div');
+        dots.className = 'carousel-dots';
+        dots.setAttribute('role', 'tablist');
+        dots.setAttribute('aria-label', 'Navegação do carrossel');
+
+        const dotEls = slides.map((slide, i) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'carousel-dot' + (i === 0 ? ' is-active' : '');
+            dot.setAttribute('aria-label', `Ir para o card ${i + 1} de ${slides.length}`);
+            dot.addEventListener('click', () => {
+                slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            });
+            dots.appendChild(dot);
+            return dot;
+        });
+
+        carousel.insertAdjacentElement('afterend', dots);
+
+        let ticking = false;
+        carousel.addEventListener('scroll', () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+                const progress = maxScroll > 0 ? carousel.scrollLeft / maxScroll : 0;
+                const active = Math.round(progress * (slides.length - 1));
+                dotEls.forEach((d, i) => d.classList.toggle('is-active', i === active));
+                ticking = false;
+            });
+        }, { passive: true });
+    });
+
     // --- 6. Mobile Menu (with full a11y: aria-hidden, tabindex, focus trap) ---
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');

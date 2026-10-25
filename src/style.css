@@ -327,4 +327,86 @@ input[type="date"] {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+}
+
+/* ============================================================
+   Mobile Carousel (somente < 768px) — cards lado a lado com swipe
+   ============================================================ */
+@media (max-width: 767px) {
+    .mobile-carousel {
+        display: flex !important;
+        gap: 16px !important;
+        overflow-x: auto;
+        overflow-y: visible;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 20px;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        /* sangra até as bordas da tela, mantendo o recuo do 1º card */
+        margin-inline: -20px;
+        padding: 8px 20px 20px !important;
+        width: auto !important;
+        max-width: none !important;
+    }
+
+    .mobile-carousel::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Carrossel que já ocupa a largura total (bilhetes de vantagens) */
+    .mobile-carousel.w-full {
+        margin-inline: 0;
+        width: 100% !important;
+    }
+
+    .mobile-carousel > * {
+        flex: 0 0 84%;
+        max-width: 84%;
+        scroll-snap-align: start;
+        margin: 0 !important;
+    }
+
+    /* Cards de destinos um pouco mais baixos no celular */
+    .mobile-carousel > a.h-\[400px\] {
+        height: 340px;
+    }
+
+    /* No carrossel os cards já estão visíveis — sem animação de entrada */
+    .mobile-carousel > .reveal-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .carousel-dots {
+        display: none !important;
+    }
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+    position: relative;
+    z-index: 10;
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: rgba(244, 185, 62, 0.35);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.carousel-dot.is-active {
+    width: 24px;
+    background: #F4B93E;
 }
