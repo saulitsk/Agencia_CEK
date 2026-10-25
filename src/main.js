@@ -167,6 +167,9 @@ document.addEventListener("DOMContentLoaded", () => {
         dots.setAttribute('aria-label', 'Navegação do carrossel');
 
         const dotEls = slides.map((slide, i) => {
+            if (slide.classList.contains('reveal-up')) {
+                slide.classList.add('is-visible');
+            }
             const dot = document.createElement('button');
             dot.type = 'button';
             dot.className = 'carousel-dot' + (i === 0 ? ' is-active' : '');

@@ -396,6 +396,7 @@ input[type="date"] {
 }
 
 .carousel-dot {
+    position: relative;
     width: 8px;
     height: 8px;
     border-radius: 9999px;
@@ -404,6 +405,16 @@ input[type="date"] {
     padding: 0;
     cursor: pointer;
     transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.carousel-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 36px;
+    min-height: 36px;
 }
 
 .carousel-dot.is-active {
