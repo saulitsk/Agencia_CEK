@@ -468,4 +468,27 @@ input[type="date"] {
         bottom: 92px;
     }
 }
+
+/* ============================================================
+   Ticket Highlight Typography (~30% heavier stroke on mobile/desktop)
+   ============================================================ */
+.ticket-title-bold {
+    font-weight: 800;
+    -webkit-text-stroke: 0.45px currentColor;
+    paint-order: stroke fill;
+}
+
+.ticket-callout-sub {
+    font-weight: 800;
+    -webkit-text-stroke: 0.4px currentColor;
+    paint-order: stroke fill;
+}
+
+.ticket-callout-main {
+    font-weight: 800;
+    -webkit-text-stroke: 1.35px currentColor;
+    paint-order: stroke fill;
+    letter-spacing: -0.02em;
+}
+
 
