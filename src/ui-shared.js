@@ -10,6 +10,8 @@ const WHATSAPP_URL_PADRAO =
   'https://wa.me/5511954047211?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20Ag%C3%AAncia%20C%26K%20e%20gostaria%20de%20comprar%20uma%20passagem.';
 const COOKIE_STORAGE_KEY = 'cek_cookie_consent';
 
+const WHATSAPP_SVG_ICON = `<svg class="w-[20px] h-[20px] shrink-0 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.359 4.984L2 22l5.188-1.359c1.453.797 3.109 1.219 4.844 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.828 14.141c-.25.703-1.453 1.344-2.016 1.422-.516.078-1.172.109-1.906-.125-.453-.141-1.031-.328-1.766-.641-3.109-1.344-5.141-4.484-5.297-4.688-.156-.203-1.266-1.688-1.266-3.219s.797-2.281 1.078-2.594c.281-.312.609-.391.812-.391.203 0 .406.016.578.016.188 0 .438-.078.688.516.25.609.859 2.094.938 2.25.078.156.125.344.031.547-.094.203-.141.328-.297.5-.156.172-.312.391-.453.516-.156.141-.312.312-.141.609.172.297.766 1.266 1.641 2.047 1.125 1 2.078 1.312 2.375 1.469.297.156.469.125.641-.078.172-.203.75-.875.953-1.172.203-.297.406-.25.672-.156.266.094 1.703.812 2 .953.297.141.484.219.562.344.078.125.078.719-.172 1.422z"/></svg>`;
+
 export function initSharedUI() {
   initLoadingStates();
   initMobileWhatsappFloat();
@@ -96,7 +98,7 @@ function initMobileWhatsappFloat() {
       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-deep-navy opacity-40"></span>
       <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-deep-navy"></span>
     </span>
-    <span class="material-symbols-outlined text-[20px] leading-none" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
+    ${WHATSAPP_SVG_ICON}
     <span>WhatsApp</span>
   `;
 
