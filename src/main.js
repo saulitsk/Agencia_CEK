@@ -1,7 +1,9 @@
 import './style.css'
 import Lenis from 'lenis'
+import { initSharedUI } from './ui-shared.js'
 
 document.addEventListener("DOMContentLoaded", () => {
+    initSharedUI();
     
     // --- 1. Acessibilidade e Detecção de Touch/Mobile ---
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

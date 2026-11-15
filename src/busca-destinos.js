@@ -21,13 +21,18 @@ import {
   DESTINOS,
 } from './destinos-data.js';
 import { initCalendario } from './calendario.js';
+import { initSharedUI } from './ui-shared.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  initSharedUI();
+
   const inputDestino = document.getElementById('destino-input');
   const listaSugestoes = document.getElementById('destino-suggestions');
   const inputData = document.getElementById('data-ida');
   const inputDataDisplay = document.getElementById('data-ida-display');
   const btnConsultar = document.getElementById('btn-ver-valores');
+  const btnConsultarText = document.getElementById('btn-ver-valores-text');
+  const btnConsultarIcon = document.getElementById('btn-ver-valores-icon');
   const form = document.getElementById('busca-form');
   const listagemContainer = document.getElementById('listagem-destinos');
 
@@ -35,6 +40,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Inicializar calendário customizado ---
   const calendario = initCalendario(validarFormulario);
+
+  // --- Elemento de erro para destino ---
+  let destinoErroEl = null;
+  const containerDestino = document.getElementById('campo-destino-grupo') || inputDestino.parentElement?.parentElement;
+  if (containerDestino) {
+    destinoErroEl = document.createElement('p');
+    destinoErroEl.className = 'font-body-md text-[13px] text-error mt-1.5 hidden flex items-center gap-1';
+    destinoErroEl.setAttribute('role', 'alert');
+    destinoErroEl.id = 'destino-erro';
+    containerDestino.appendChild(destinoErroEl);
+    inputDestino.setAttribute('aria-describedby', 'destino-erro');
+  }
+
+  function mostrarErroDestino(mensagem) {
+    if (destinoErroEl) {
+      destinoErroEl.innerHTML = `<span class="material-symbols-outlined text-[15px] shrink-0" aria-hidden="true">error</span><span>${escapeHtml(mensagem)}</span>`;
+      destinoErroEl.classList.remove('hidden');
+    }
+    inputDestino.classList.add('border-error');
+    inputDestino.setAttribute('aria-invalid', 'true');
+  }
+
+  function limparErroDestino() {
+    if (destinoErroEl) {
+      destinoErroEl.textContent = '';
+      destinoErroEl.classList.add('hidden');
+    }
+    inputDestino.classList.remove('border-error');
+    inputDestino.removeAttribute('aria-invalid');
+  }
+
+  // --- Feedback de carregamento no botão ao abrir WhatsApp ---
+  function animarBotaoEnvio() {
+    if (!btnConsultarText || !btnConsultarIcon) return;
+    const textoOriginal = btnConsultarText.textContent;
+    const iconeOriginal = btnConsultarIcon.textContent;
+    btnConsultarText.textContent = 'Abrindo WhatsApp…';
+    btnConsultarIcon.textContent = 'progress_activity';
+    btnConsultarIcon.classList.add('animate-spin');
+    setTimeout(() => {
+      btnConsultarText.textContent = textoOriginal;
+      btnConsultarIcon.textContent = iconeOriginal;
+      btnConsultarIcon.classList.remove('animate-spin');
+    }, 1400);
+  }
 
   // --- Elemento de erro para data ---
   let dataErroEl = null;
@@ -264,6 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function selecionarCidade(destino) {
     inputDestino.value = `${destino.nome} — ${destino.uf}`;
     destinoSelecionado = { nome: destino.nome, uf: destino.uf };
+    limparErroDestino();
     listaSugestoes.classList.add('hidden');
     listaSugestoes.innerHTML = '';
     inputDestino.setAttribute('aria-expanded', 'false');
@@ -304,12 +355,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Validar data antes de abrir WhatsApp
     if (!validarData()) return;
 
+    limparErroDestino();
+    listaSugestoes.classList.add('hidden');
+    inputDestino.setAttribute('aria-expanded', 'false');
+
     let dataStr = 'a definir';
     if (inputData && inputData.value) {
       const [ano, mes, dia] = inputData.value.split('-');
       dataStr = `${dia}/${mes}/${ano}`;
     }
 
+    animarBotaoEnvio();
     const mensagem = MENSAGEM_DESTINO_LIVRE(textoLimpo, dataStr);
     const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -329,8 +385,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   inputDestino.addEventListener('input', () => {
     destinoSelecionado = null;
+    limparErroDestino();
     renderSugestoes(inputDestino.value);
     validarFormulario();
+  });
+
+  inputDestino.addEventListener('blur', () => {
+    setTimeout(() => {
+      const texto = inputDestino.value.trim();
+      if (texto.length > 0 && !destinoSelecionado && listaSugestoes.classList.contains('hidden')) {
+        const textoNorm = normalizar(texto);
+        const exactMatch = DESTINOS.find(d => normalizar(d.nome) === textoNorm);
+        if (exactMatch) {
+          selecionarCidade(exactMatch);
+        } else {
+          mostrarErroDestino('Selecione uma cidade na lista de sugestões para continuar.');
+        }
+      }
+    }, 200);
   });
 
   inputDestino.addEventListener('focus', () => {
@@ -397,10 +469,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // 3) Se já tem destino selecionado, submete o formulário
-      if (destinoSelecionado && !btnConsultar.disabled) {
+      if (destinoSelecionado) {
         form?.dispatchEvent(new Event('submit', { cancelable: true }));
+        return;
       }
-      // Se nenhuma condição se aplica, Enter não faz nada (não submete sem destino)
+
+      // 4) Se nenhuma condição se aplica, exibe mensagem de erro clara
+      if (texto.length === 0) {
+        mostrarErroDestino('Por favor, digite e selecione a cidade de destino.');
+      } else {
+        mostrarErroDestino('Selecione uma cidade na lista de sugestões abaixo.');
+        renderSugestoes(texto);
+      }
 
     } else if (e.key === 'Escape') {
       listaSugestoes.classList.add('hidden');
@@ -433,13 +513,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const dataValida = validarData();
     const formularioValido = destinoPreenchido && dataValida;
 
-    btnConsultar.disabled = !formularioValido;
+    btnConsultar.setAttribute('aria-disabled', formularioValido ? 'false' : 'true');
 
     if (formularioValido) {
-      btnConsultar.classList.remove('opacity-50', 'cursor-not-allowed');
+      btnConsultar.classList.remove('opacity-50');
       btnConsultar.classList.add('hover:-translate-y-1', 'hover:shadow-[0px_4px_0px_0px_#12205C]');
     } else {
-      btnConsultar.classList.add('opacity-50', 'cursor-not-allowed');
+      btnConsultar.classList.add('opacity-50');
       btnConsultar.classList.remove('hover:-translate-y-1', 'hover:shadow-[0px_4px_0px_0px_#12205C]');
     }
   }
@@ -453,7 +533,30 @@ document.addEventListener('DOMContentLoaded', () => {
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      if (btnConsultar.disabled || !destinoSelecionado) return;
+
+      // Se o usuário digitou o nome exato da cidade sem clicar na sugestão, seleciona automaticamente
+      if (!destinoSelecionado) {
+        const texto = inputDestino.value.trim();
+        if (texto.length === 0) {
+          mostrarErroDestino('Por favor, digite e selecione a cidade de destino.');
+          inputDestino.focus();
+          return;
+        }
+        const textoNorm = normalizar(texto);
+        const exactMatch = DESTINOS.find(d => normalizar(d.nome) === textoNorm);
+        if (exactMatch) {
+          destinoSelecionado = { nome: exactMatch.nome, uf: exactMatch.uf };
+          inputDestino.value = `${exactMatch.nome} — ${exactMatch.uf}`;
+          limparErroDestino();
+          validarFormulario();
+        } else {
+          mostrarErroDestino('Selecione uma cidade da lista de sugestões abaixo (ou clique em "Consultar mesmo assim").');
+          inputDestino.focus();
+          renderSugestoes(texto);
+          return;
+        }
+      }
+
       if (!validarData()) return;
 
       let dataStr = 'a definir';
@@ -462,6 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dataStr = `${dia}/${mes}/${ano}`;
       }
 
+      animarBotaoEnvio();
       const mensagem = MENSAGEM_DESTINO_CADASTRADO(destinoSelecionado.nome, destinoSelecionado.uf, dataStr);
       const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
       window.open(url, '_blank', 'noopener,noreferrer');

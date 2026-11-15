@@ -12,7 +12,22 @@
     <meta property="og:description"
         content="Encontre passagens de ônibus de São Paulo para a Bahia e outros estados com a Agência C&K.">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="./og-image.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Agência C&K — Buscar passagens de São Paulo para a Bahia e outros estados.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Buscar Destinos — Agência C&K">
+    <meta name="twitter:description" content="Encontre passagens de ônibus de São Paulo para a Bahia e outros estados com a Agência C&K.">
+    <meta name="twitter:image" content="./og-image.jpg">
     <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#12205C">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
@@ -187,7 +202,7 @@
                         </div>
 
                         <!-- Destino (autocomplete) -->
-                        <div class="search-field-group">
+                        <div class="search-field-group" id="campo-destino-grupo">
                             <label for="destino-input"
                                 class="font-label-caps text-label-caps text-deep-navy/70 mb-1.5 flex items-center gap-1.5 tracking-widest uppercase">
                                 <span class="material-symbols-outlined text-[16px] text-vibrant-gold"
@@ -255,12 +270,12 @@
                         <div class="border-t border-deep-navy/10 my-1"></div>
 
                         <!-- CTA -->
-                        <button type="submit" id="btn-ver-valores" disabled
-                            class="w-full flex items-center justify-center gap-2 bg-vibrant-gold text-deep-navy px-8 py-4 rounded-lg font-headline-md font-bold text-[15px] tracking-tight transition-all duration-200 opacity-50 cursor-not-allowed">
+                        <button type="submit" id="btn-ver-valores" aria-disabled="true"
+                            class="w-full flex items-center justify-center gap-2 bg-vibrant-gold text-deep-navy px-8 py-4 rounded-lg font-headline-md font-bold text-[15px] tracking-tight transition-all duration-200 opacity-50 cursor-pointer">
                             <span class="material-symbols-outlined text-[20px]"
                                 style="font-variation-settings: 'FILL' 1;" aria-hidden="true">chat</span>
-                            Consultar Passagem
-                            <span class="material-symbols-outlined text-[18px] ml-1"
+                            <span id="btn-ver-valores-text">Consultar Passagem</span>
+                            <span id="btn-ver-valores-icon" class="material-symbols-outlined text-[18px] ml-1"
                                 aria-hidden="true">arrow_forward</span>
                         </button>
 
@@ -325,7 +340,4 @@
         </div>
     </footer>
 
-    <script type="module" src="./src/busca-destinos.js"></script>
-</body>
-
-</html>
+    <script 

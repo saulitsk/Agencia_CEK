@@ -10,6 +10,7 @@ export default defineConfig({
         destinos: resolve(__dirname, 'destinos.html'),
         termos: resolve(__dirname, 'termos.html'),
         privacidade: resolve(__dirname, 'privacidade.html'),
+        notFound: resolve(__dirname, '404.html'),
       },
     },
   },

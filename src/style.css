@@ -420,4 +420,52 @@ input[type="date"] {
 .carousel-dot.is-active {
     width: 24px;
     background: #F4B93E;
-}
+}
+
+/* ============================================================
+   Loading Animations (Skeleton Shimmer & Image Fade-in)
+   ============================================================ */
+@keyframes shimmerSweep {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton-shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(18, 32, 92, 0.08) 25%,
+        rgba(244, 185, 62, 0.18) 50%,
+        rgba(18, 32, 92, 0.08) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmerSweep 1.6s ease-in-out infinite;
+}
+
+.img-loading {
+    opacity: 0;
+}
+
+.img-loaded {
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+/* ============================================================
+   Mobile WhatsApp Floating Button & Cookie Banner Coordination
+   ============================================================ */
+@media (max-width: 767px) {
+    body.has-cookie-banner .whatsapp-float {
+        bottom: 148px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1099px) {
+    body.has-cookie-banner .whatsapp-float {
+        bottom: 92px;
+    }
+}
+
